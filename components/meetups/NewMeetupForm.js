@@ -1,48 +1,24 @@
-import { useRef, useState } from "react";
+import { useRef} from "react";
 
 import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
+import Checkbox from "./Checkbox";
 
 const allDriveCert = [
-  { name: "輕型機車駕照", checked: false, value: 1 },
-  { name: "普通重型機車駕照", checked: false, value: 2 },
-  { name: "大型重型機車駕照", checked: false, value: 4 },
-  { name: "普通小型車駕照", checked: false, value: 8 },
-  { name: "普通大貨車駕照", checked: false, value: 16 },
-  { name: "普通大客車駕照", checked: false, value: 32 },
-  { name: "普通聯結車駕照", checked: false, value: 64 },
-  { name: "職業小型車駕照", checked: false, value: 128 },
-  { name: "職業大貨車駕照", checked: false, value: 256 },
-  { name: "職業大客車駕照", checked: false, value: 512 },
-  { name: "職業聯結車駕照", checked: false, value: 1024 },
+  { name: "輕型機車駕照", value: 1 },
+  { name: "普通重型機車駕照", value: 2 },
+  { name: "大型重型機車駕照", value: 4 },
+  { name: "普通小型車駕照", value: 8 },
+  { name: "普通大貨車駕照", value: 16 },
+  { name: "普通大客車駕照", value: 32 },
+  { name: "普通聯結車駕照", value: 64 },
+  { name: "職業小型車駕照", value: 128 },
+  { name: "職業大貨車駕照", value: 256 },
+  { name: "職業大客車駕照", value: 512 },
+  { name: "職業聯結車駕照", value: 1024 },
 ];
 
-export const Checkbox = ({ isChecked, label, checkHandler, index, value }) => {
-  let checkedList = [];
-  const updateCheckStatus = (event) => {
-    const { value, checked } = event.target;
-    if (checked === true) {
-      checkedList.push(value);
-    }
-  };
-  
-  return (
-    <div className={classes.col1}>
-      <input
-        type="checkbox"
-        id={`checkbox-${index}`}
-        value={value}
-        checked={isChecked}
-        onChange={checkHandler}
-      />
-      <label htmlFor={`checkbox-${index}`}>{label}</label>
-    </div>
-  );
-};
-
-
 function NewMeetupForm(props) {
-  
   //AC
   const familyNameInputRef = useRef();
   const firstNameInputRef = useRef();
@@ -83,7 +59,6 @@ function NewMeetupForm(props) {
       honoraryDischargeYearInputRef.current.value;
     const enteredHonoraryDischargeMonth =
       honoraryDischargeMonthInputRef.current.value;
-    // const enteredDriveCert =driveCertInputRef.current.checked;
     const enteredBio = bioInputRef.current.value;
 
     const meetupData = {
@@ -334,10 +309,11 @@ function NewMeetupForm(props) {
         {allDriveCert.map((driveCert, index) => (
           <Checkbox
             key={driveCert.name}
-            checkHandler={updateCheckStatus}
+            type="driveCert"
             label={driveCert.name}
             index={index}
             value={driveCert.value}
+            getCheckedList={checkedListHandler}
           />
         ))}
         {/* 個人簡介 */}
