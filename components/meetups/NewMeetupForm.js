@@ -7,9 +7,25 @@ const allDriveCert = [
   { name: "輕型機車駕照", checked: false, value: 1 },
   { name: "普通重型機車駕照", checked: false, value: 2 },
   { name: "大型重型機車駕照", checked: false, value: 4 },
+  { name: "普通小型車駕照", checked: false, value: 8 },
+  { name: "普通大貨車駕照", checked: false, value: 16 },
+  { name: "普通大客車駕照", checked: false, value: 32 },
+  { name: "普通聯結車駕照", checked: false, value: 64 },
+  { name: "職業小型車駕照", checked: false, value: 128 },
+  { name: "職業大貨車駕照", checked: false, value: 256 },
+  { name: "職業大客車駕照", checked: false, value: 512 },
+  { name: "職業聯結車駕照", checked: false, value: 1024 },
 ];
 
 export const Checkbox = ({ isChecked, label, checkHandler, index, value }) => {
+  let checkedList = [];
+  const updateCheckStatus = (event) => {
+    const { value, checked } = event.target;
+    if (checked === true) {
+      checkedList.push(value);
+    }
+  };
+  
   return (
     <div className={classes.col1}>
       <input
@@ -17,14 +33,16 @@ export const Checkbox = ({ isChecked, label, checkHandler, index, value }) => {
         id={`checkbox-${index}`}
         value={value}
         checked={isChecked}
-        // onChange={c   heckHandler}
+        onChange={checkHandler}
       />
       <label htmlFor={`checkbox-${index}`}>{label}</label>
     </div>
   );
 };
 
+
 function NewMeetupForm(props) {
+  
   //AC
   const familyNameInputRef = useRef();
   const firstNameInputRef = useRef();
@@ -42,18 +60,6 @@ function NewMeetupForm(props) {
   const militaryInputRef = useRef();
   const honoraryDischargeYearInputRef = useRef();
   const honoraryDischargeMonthInputRef = useRef();
-  // const driveCertInputRef = useRef([]);
-  const [driveCerts, setDriveCert] = useState(allDriveCert);
-  const updateCheckStatus = (event) => {
-    console.log(event.target.value)
-    // setDriveCert(
-    //   driveCerts.map((driveCert, currentindex) => {
-    //     currentindex === index
-    //       ? { ...driveCert, checked: !driveCert.checked }
-    //       : driveCert;
-    //   })
-    // );
-  };
   const bioInputRef = useRef();
 
   function submitHandler(event) {
@@ -100,7 +106,7 @@ function NewMeetupForm(props) {
       bio: enteredBio,
     };
 
-    console.log(driveCertInputRef);
+    // console.log(driveCertInputRef);
     console.log(meetupData);
   }
 
@@ -325,18 +331,15 @@ function NewMeetupForm(props) {
         <div className={classes.control}>
           <label htmlFor="driveCert">駕駛執照</label>
         </div>
-        {
-          driveCerts.map((driveCert,index)=>(
-            <Checkbox 
+        {allDriveCert.map((driveCert, index) => (
+          <Checkbox
             key={driveCert.name}
-            // isChecked={driveCert.checked}
             checkHandler={updateCheckStatus}
             label={driveCert.name}
             index={index}
             value={driveCert.value}
-            />
-          ))
-        }
+          />
+        ))}
         {/* 個人簡介 */}
         <div className={classes.control}>
           <label htmlFor="bio">個人簡介</label>
