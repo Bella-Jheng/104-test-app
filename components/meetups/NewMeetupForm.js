@@ -18,6 +18,10 @@ const allDriveCert = [
   { name: "職業聯結車駕照", value: 1024 },
 ];
 
+const checkedListHandler =(checkedLists)=>{
+  // console.log(checkedLists)
+}
+
 function NewMeetupForm(props) {
   //AC
   const familyNameInputRef = useRef();
@@ -77,11 +81,9 @@ function NewMeetupForm(props) {
       military: +enteredMilitary,
       honoraryDischargeYear: enteredHonoraryDischargeYear,
       honoraryDischargeMonth: enteredHonoraryDischargeMonth,
-      // driveCert:enteredDriveCert,
       bio: enteredBio,
     };
 
-    // console.log(driveCertInputRef);
     console.log(meetupData);
   }
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import classes from "./NewMeetupForm.module.css";
 
-const Checkbox = ({ type, label, index, value, getCheckedList }) => {
-  const [checkedLists, setCheckList] = useState();
+let checkedList = [];
 
-  function checkedListHandler(checkedList, type) {}
-  let checkedList = [];
+const Checkbox = ({ type, label, index, value, getCheckedList }) => {
+  const [checkedLists, setCheckLists] = useState({});
+
   const updateCheckStatus = (event) => {
     const { value, checked } = event.target;
     let isIncluded = checkedList.includes(value);
@@ -15,12 +15,14 @@ const Checkbox = ({ type, label, index, value, getCheckedList }) => {
     } else if (checked === false && isIncluded) {
       checkedList = checkedList.filter((val) => val != value);
     }
-    setCheckList((prev)=>{
-        return {
-            ...prev,
-            [type]:checkedList
-        }
-    })
+
+    setCheckLists(prevState => (
+      {
+        ...prevState,
+        [type]:checkedList
+    }));
+
+    console.log(checkedLists);
     getCheckedList(checkedLists);
   };
 
