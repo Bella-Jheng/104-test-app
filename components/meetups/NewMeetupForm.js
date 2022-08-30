@@ -1,4 +1,4 @@
-import { useRef} from "react";
+import { useRef, useState, useEffect } from "react";
 
 import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
@@ -17,10 +17,6 @@ const allDriveCert = [
   { name: "職業大客車駕照", value: 512 },
   { name: "職業聯結車駕照", value: 1024 },
 ];
-
-const checkedListHandler =(checkedLists)=>{
-  // console.log(checkedLists)
-}
 
 function NewMeetupForm(props) {
   //AC
@@ -41,6 +37,62 @@ function NewMeetupForm(props) {
   const honoraryDischargeYearInputRef = useRef();
   const honoraryDischargeMonthInputRef = useRef();
   const bioInputRef = useRef();
+  //學歷
+  const schoolNameInputRef = useRef();
+  const highestEduInputRef = useRef();
+  const departmentsNameInputRef = useRef([]);
+  const departmentsTypeInputRef = useRef([]);
+
+  const [checkedLists, setCheckLists] = useState({});
+  const checkedListHandler = (checkedList, type) => {
+    setCheckLists((prevState) => ({
+      ...prevState,
+      [type]: checkedList,
+    }));
+  };
+
+  const [departmentList, setDepartmentList] = useState([]);
+  const Department = ()=>{
+    return (
+      <div className={`${classes.control} + ${classes.col2}`}>
+        <div>
+      <label htmlFor="departmentsName">科系名稱​​</label>
+      <input
+        type="text"
+        required
+        id="departmentsName"
+        ref={val => departmentsNameInputRef.current[departmentList.length+1]=val}
+      />
+    </div>
+    <div>
+      <label htmlFor="departmentsType">科系類別</label>
+      <input
+        type="number"
+        required
+        id="departmentsType"
+        ref={val => departmentsTypeInputRef.current[departmentList.length+1]=val}
+      />
+    </div>
+    </div>);
+  }
+  const addDepartmentHandler = ()=>{
+    setDepartmentList(departmentList.concat(<Department key={departmentList.length+1}/>))
+  }
+
+  const departmentsHandler=()=>{
+    let department =[];
+    const departmentNames = departmentsNameInputRef.current;
+    const departmentTypes = departmentsTypeInputRef.current;
+
+    for( let i=0 ; i< departmentNames.length; i++){
+      let obj = {
+        name:departmentNames[1].value,
+        type:[departmentTypes[1].value]
+      }
+      department.push(obj)
+    }
+    return department;
+  }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -63,7 +115,13 @@ function NewMeetupForm(props) {
       honoraryDischargeYearInputRef.current.value;
     const enteredHonoraryDischargeMonth =
       honoraryDischargeMonthInputRef.current.value;
+    const enteredDriveCert = checkedLists.driveCert;
     const enteredBio = bioInputRef.current.value;
+    //學歷
+    const enteredSchoolName = schoolNameInputRef.current.value;
+    const enteredSchoolHightest = highestEduInputRef.current.checked;
+    const department = departmentsHandler()
+
 
     const meetupData = {
       familyName: enteredFamilyName,
@@ -81,7 +139,11 @@ function NewMeetupForm(props) {
       military: +enteredMilitary,
       honoraryDischargeYear: enteredHonoraryDischargeYear,
       honoraryDischargeMonth: enteredHonoraryDischargeMonth,
+      driveCert: enteredDriveCert,
       bio: enteredBio,
+      name: enteredSchoolName,
+      highest: +enteredSchoolHightest,
+      department:department,
     };
 
     console.log(meetupData);
@@ -324,6 +386,52 @@ function NewMeetupForm(props) {
           <textarea type="text" id="bio" ref={bioInputRef} />
         </div>
 
+        <h1>學歷</h1>
+        {/* 學校名稱 */}
+        <div className={classes.control}>
+          <label htmlFor="schoolName">學校名稱​</label>
+          <input type="text" id="schoolName" ref={schoolNameInputRef} />
+        </div>
+        {/* 最高學歷 */}
+        <div className={classes.control}>
+          <label htmlFor="highestEdu">最高學歷</label>
+          <select id="highestEdu" ref={highestEduInputRef}>
+            <option value="1">博士</option>
+            <option value="2">碩士</option>
+            <option value="3">大學</option>
+            <option value="4">四技</option>
+            <option value="5">二技</option>
+            <option value="6">二專</option>
+            <option value="7">三專</option>
+            <option value="8">五專</option>
+            <option value="9">高中</option>
+            <option value="10">高職</option>
+            <option value="11">國中(含)以下</option>
+          </select>
+        </div>
+        {/* 科系名稱、類別​ */}
+        <div className={`${classes.control} + ${classes.col2}`}>
+          <div>
+            <label htmlFor="departmentsName">科系名稱​​</label>
+            <input
+              type="text"
+              required
+              id="departmentsName"
+              ref={val => departmentsNameInputRef.current[0]=val}
+            />
+          </div>
+          <div>
+            <label htmlFor="departmentsType">科系類別</label>
+            <input
+              type="number"
+              required
+              id="departmentsType"
+              ref={val => departmentsTypeInputRef.current[0]=val}
+            />
+          </div>
+        </div>
+        {departmentList}
+          <div onClick={addDepartmentHandler}>+ 新增科系</div>
         <div className={classes.actions}>
           <button>Submit</button>
         </div>

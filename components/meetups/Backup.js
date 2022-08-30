@@ -376,8 +376,8 @@ function NewMeetupForm(props) {
             <option value="11">國中(含)以下</option>
           </select>
         </div>
+        {/* 科系名稱​ */}
         <div className={`${classes.control} + ${classes.col2}`}>
-          {/* 科系名稱​ */}
           <div>
             <label htmlFor="departmentsName">科系名稱​​</label>
             <input
