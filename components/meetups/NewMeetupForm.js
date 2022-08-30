@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
 import Checkbox from "./Checkbox";
+import Radio from "./Radio";
 
 const allDriveCert = [
   { name: "輕型機車駕照", value: 1 },
@@ -26,14 +27,12 @@ function NewMeetupForm(props) {
   const birthYearInputRef = useRef();
   const birthMonthInputRef = useRef();
   const birthDateInputRef = useRef();
-  const genderInputRef = useRef();
   const cellphoneInputRef = useRef();
   const emailInputRef = useRef();
   //個人資料
   const cityInputRef = useRef();
   const streetInputRef = useRef();
   const jobStatusInputRef = useRef();
-  const militaryInputRef = useRef();
   const honoraryDischargeYearInputRef = useRef();
   const honoraryDischargeMonthInputRef = useRef();
   const bioInputRef = useRef();
@@ -42,6 +41,8 @@ function NewMeetupForm(props) {
   const highestEduInputRef = useRef();
   const departmentsNameInputRef = useRef([]);
   const departmentsTypeInputRef = useRef([]);
+  const eduDurationStartInputRef = useRef([]);
+  const eduDurationEndInputRef = useRef([]);
 
   const [checkedLists, setCheckLists] = useState({});
   const checkedListHandler = (checkedList, type) => {
@@ -52,47 +53,66 @@ function NewMeetupForm(props) {
   };
 
   const [departmentList, setDepartmentList] = useState([]);
-  const Department = ()=>{
+  const Department = () => {
     return (
       <div className={`${classes.control} + ${classes.col2}`}>
         <div>
-      <label htmlFor="departmentsName">科系名稱​​</label>
-      <input
-        type="text"
-        required
-        id="departmentsName"
-        ref={val => departmentsNameInputRef.current[departmentList.length+1]=val}
-      />
-    </div>
-    <div>
-      <label htmlFor="departmentsType">科系類別</label>
-      <input
-        type="number"
-        required
-        id="departmentsType"
-        ref={val => departmentsTypeInputRef.current[departmentList.length+1]=val}
-      />
-    </div>
-    </div>);
-  }
-  const addDepartmentHandler = ()=>{
-    setDepartmentList(departmentList.concat(<Department key={departmentList.length+1}/>))
-  }
+          <label htmlFor="departmentsName">科系名稱​​</label>
+          <input
+            type="text"
+            id="departmentsName"
+            ref={(val) =>
+              (departmentsNameInputRef.current[departmentList.length + 1] = val)
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="departmentsType">科系類別</label>
+          <input
+            type="number"
+            id="departmentsType"
+            ref={(val) =>
+              (departmentsTypeInputRef.current[departmentList.length + 1] = val)
+            }
+          />
+        </div>
+      </div>
+    );
+  };
+  const addDepartmentHandler = () => {
+    setDepartmentList(
+      departmentList.concat(<Department key={departmentList.length + 1} />)
+    );
+  };
 
-  const departmentsHandler=()=>{
-    let department =[];
+  const departmentsHandler = () => {
+    let department = [];
     const departmentNames = departmentsNameInputRef.current;
     const departmentTypes = departmentsTypeInputRef.current;
 
-    for( let i=0 ; i< departmentNames.length; i++){
+    for (let i = 0; i < departmentNames.length; i++) {
       let obj = {
-        name:departmentNames[1].value,
-        type:[departmentTypes[1].value]
-      }
-      department.push(obj)
+        name: departmentNames[i].value,
+        type: [departmentTypes[i].value],
+      };
+      department.push(obj);
     }
     return department;
-  }
+  };
+
+  const durationHandler = () => {
+    const durationStartYear = eduDurationStartInputRef.current[0].value;
+    const durationStartMonth = eduDurationStartInputRef.current[1].value;
+    const durationEndYear = eduDurationEndInputRef.current[0].value;
+    const durationEndMonth = eduDurationEndInputRef.current[1].value;
+
+    return {
+      startYear: durationStartYear,
+      startMonth: +durationStartMonth,
+      endYear: durationEndYear,
+      endMonth: +durationEndMonth,
+    };
+  };
 
   function submitHandler(event) {
     event.preventDefault();
@@ -103,14 +123,14 @@ function NewMeetupForm(props) {
     const enteredBirthYear = birthYearInputRef.current.value;
     const enteredBirthMonth = birthMonthInputRef.current.value;
     const enteredBirthDate = birthDateInputRef.current.value;
-    const enteredGender = genderInputRef.current.checked;
+    const enteredGender =   checkedLists.gender;
     const enteredCellphone = cellphoneInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     //個人資料
     const enteredCity = cityInputRef.current.value;
     const enteredStreet = streetInputRef.current.value;
-    const enteredJobStatus = jobStatusInputRef.current.checked;
-    const enteredMilitary = militaryInputRef.current.checked;
+    const enteredJobStatus =   checkedLists.jobStatus;
+    const enteredMilitary =   checkedLists.military;
     const enteredHonoraryDischargeYear =
       honoraryDischargeYearInputRef.current.value;
     const enteredHonoraryDischargeMonth =
@@ -120,8 +140,9 @@ function NewMeetupForm(props) {
     //學歷
     const enteredSchoolName = schoolNameInputRef.current.value;
     const enteredSchoolHightest = highestEduInputRef.current.checked;
-    const department = departmentsHandler()
-
+    const department = departmentsHandler();
+    const eduDuration = durationHandler();
+    const eduStatus =   checkedLists.status;
 
     const meetupData = {
       familyName: enteredFamilyName,
@@ -143,7 +164,9 @@ function NewMeetupForm(props) {
       bio: enteredBio,
       name: enteredSchoolName,
       highest: +enteredSchoolHightest,
-      department:department,
+      department: department,
+      duration: eduDuration,
+      status: +eduStatus,
     };
 
     console.log(meetupData);
@@ -202,27 +225,20 @@ function NewMeetupForm(props) {
           <label htmlFor="gender">性別</label>
         </div>
         <div>
-          <div className={classes.col1}>
-            <input
-              name="gender"
-              type="radio"
-              id="girl"
-              ref={genderInputRef}
-              value="0"
-              defaultChecked
-            />
-            <label htmlFor="gril">女</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="gender"
-              type="radio"
-              id="boy"
-              ref={genderInputRef}
-              value="1"
-            />
-            <label htmlFor="boy">男</label>
-          </div>
+          <Radio
+            name="gender"
+            id="girl"
+            value="0"
+            label="女"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="gender"
+            id="boy"
+            value="1"
+            label="男"
+            onChange={checkedListHandler}
+          />
         </div>
         {/* 手機 */}
         <div className={classes.control}>
@@ -248,92 +264,71 @@ function NewMeetupForm(props) {
         </div>
         <div>
           {/* 就業狀態 */}
-          <div className={classes.control}>
-            <label htmlFor="jobStatus">就業狀態</label>
-          </div>
-          <div className={classes.col1}>
-            <input
+          <section>
+            <div className={classes.control}>
+              <label htmlFor="jobStatus">就業狀態</label>
+            </div>
+            <Radio
               name="jobStatus"
-              type="radio"
               id="working"
-              ref={jobStatusInputRef}
               value="1"
+              label="仍在職"
+              onChange={checkedListHandler}
             />
-            <label htmlFor="working">仍在職</label>
-          </div>
-          <div className={classes.col1}>
-            <input
+            <Radio
               name="jobStatus"
-              type="radio"
               id="waiting"
-              ref={jobStatusInputRef}
               value="2"
+              label="待業中"
+              onChange={checkedListHandler}
             />
-            <label htmlFor="waiting">待業中</label>
-          </div>
+          </section>
+
           <div className={classes.control}>
             <label htmlFor="military">兵役</label>
           </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="woman"
-              ref={militaryInputRef}
-              value="0"
-            />
-            <label htmlFor="woman">未曾設定或女性</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="ending"
-              ref={militaryInputRef}
-              value="1"
-            />
-            <label htmlFor="ending">役畢</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="retirement"
-              ref={militaryInputRef}
-              value="2"
-            />
-            <label htmlFor="retirement">屆退</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="serving"
-              ref={militaryInputRef}
-              value="3"
-            />
-            <label htmlFor="serving">未役</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="standby"
-              ref={militaryInputRef}
-              value="4"
-            />
-            <label htmlFor="standby">待役</label>
-          </div>
-          <div className={classes.col1}>
-            <input
-              name="military"
-              type="radio"
-              id="exempted"
-              ref={militaryInputRef}
-              value="5"
-            />
-            <label htmlFor="exempted">免役</label>
-          </div>
+          <Radio
+            name="military"
+            id="woman"
+            value="0"
+            label="未曾設定或女性"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="military"
+            id="ending"
+            value="1"
+            label="役畢"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="military"
+            id="retirement"
+            value="2"
+            label="屆退"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="military"
+            id="serving"
+            value="3"
+            label="未役"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="military"
+            id="standby"
+            value="4"
+            label="待役"
+            onChange={checkedListHandler}
+          />
+          <Radio
+            name="military"
+            id="exempted"
+            value="5"
+            label="免役"
+            onChange={checkedListHandler}
+          />
         </div>
         {/* 退伍日期 */}
         <div className={`${classes.control} + ${classes.col2}`}>
@@ -410,28 +405,104 @@ function NewMeetupForm(props) {
           </select>
         </div>
         {/* 科系名稱、類別​ */}
-        <div className={`${classes.control} + ${classes.col2}`}>
-          <div>
-            <label htmlFor="departmentsName">科系名稱​​</label>
-            <input
-              type="text"
-              required
-              id="departmentsName"
-              ref={val => departmentsNameInputRef.current[0]=val}
-            />
+        <section>
+          <div className={`${classes.control} + ${classes.col2}`}>
+            <div>
+              <label htmlFor="departmentsName">科系名稱​​</label>
+              <input
+                type="text"
+                id="departmentsName"
+                ref={(val) => (departmentsNameInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="departmentsType">科系類別</label>
+              <input
+                type="number"
+                id="departmentsType"
+                ref={(val) => (departmentsTypeInputRef.current[0] = val)}
+              />
+            </div>
+          </div>
+          {departmentList}
+          <div
+            className={`${classes.control} + ${classes.alignRight}`}
+            onClick={addDepartmentHandler}
+          >
+            + 新增科系
+          </div>
+        </section>
+
+        {/* 就學日期 */}
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="eduDurationEnd">就學日期</label>
+          </div>
+          <div className={`${classes.control} + ${classes.col5}`}>
+            <div>
+              <label htmlFor="eduDurationStartYear">年</label>
+              <input
+                type="number"
+                id="eduDurationStartYear"
+                ref={(val) => (eduDurationStartInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="eduDurationStartMonth">月</label>
+              <input
+                type="number"
+                id="eduDurationStartMonth"
+                ref={(val) => (eduDurationStartInputRef.current[1] = val)}
+              />
+            </div>
+            <p> ~ </p>
+            <div>
+              <label htmlFor="eduDurationEndYear">年</label>
+              <input
+                type="number"
+                id="eduDurationEndYear"
+                ref={(val) => (eduDurationEndInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="eduDurationEndMonth">月</label>
+              <input
+                type="number"
+                id="eduDurationEndMonth"
+                ref={(val) => (eduDurationEndInputRef.current[1] = val)}
+              />
+            </div>
+          </div>
+        </section>
+        <section>
+          {/* 學歷狀態 */}
+          <div className={classes.control}>
+            <label htmlFor="status">學歷狀態</label>
           </div>
           <div>
-            <label htmlFor="departmentsType">科系類別</label>
-            <input
-              type="number"
-              required
-              id="departmentsType"
-              ref={val => departmentsTypeInputRef.current[0]=val}
+            <Radio
+              name="status"
+              id="graduated"
+              value="1"
+              label="畢業"
+              onChange={checkedListHandler}
+            />
+            <Radio
+              name="status"
+              id="unfinished"
+              value="2"
+              label="肄業"
+              onChange={checkedListHandler}
+            />
+            <Radio
+              name="status"
+              id="studying"
+              value="3"
+              label="就學中"
+              onChange={checkedListHandler}
             />
           </div>
-        </div>
-        {departmentList}
-          <div onClick={addDepartmentHandler}>+ 新增科系</div>
+        </section>
         <div className={classes.actions}>
           <button>Submit</button>
         </div>

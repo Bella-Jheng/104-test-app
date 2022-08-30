@@ -1,4 +1,3 @@
-import { useState,useEffect } from "react";
 import classes from "./NewMeetupForm.module.css";
 
 let checkedList = [];

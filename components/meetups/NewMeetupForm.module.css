@@ -47,6 +47,10 @@
   padding-top: 15px;
 }
 
+.alignRight{
+  text-align: right;
+}
+
 .actions {
   margin-top: 1rem;
   text-align: right;

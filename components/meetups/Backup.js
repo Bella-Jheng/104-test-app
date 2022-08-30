@@ -441,6 +441,44 @@ function NewMeetupForm(props) {
             />
           </div>
         </div>
+        
+        {/* 學歷狀態 */}
+        <div className={classes.control}>
+          <label htmlFor="status">學歷狀態</label>
+        </div>
+        <div>
+          <div className={classes.col1}>
+            <input
+              name="status"
+              type="radio"
+              id="graduated"
+              ref={addressInputRef}
+              value="1"
+            />
+            <label htmlFor="graduated">畢業</label>
+          </div>
+          <div className={classes.col1}>
+            <input
+              name="status"
+              type="radio"
+              id="unfinished"
+              ref={addressInputRef}
+              value="2"
+            />
+            <label htmlFor="unfinished">肄業</label>
+          </div>
+          <div className={classes.col1}>
+            <input
+              name="status"
+              type="radio"
+              required
+              id="studying"
+              ref={addressInputRef}
+              value="3"
+            />
+            <label htmlFor="studying">就學中</label>
+          </div>
+          </div>
         {/* 公司名稱​ */}
         <div className={classes.control}>
           <label htmlFor="companyName">公司名稱​​</label>
