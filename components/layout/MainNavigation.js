@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import classes from './MainNavigation.module.css';
 
 function MainNavigation() {

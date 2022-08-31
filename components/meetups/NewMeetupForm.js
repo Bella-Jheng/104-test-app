@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
