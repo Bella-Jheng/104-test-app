@@ -4,6 +4,7 @@ import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
+import InputTags from './TagInput'
 
 const allDriveCert = [
   { name: "輕型機車駕照", value: 1 },
@@ -17,6 +18,12 @@ const allDriveCert = [
   { name: "職業大貨車駕照", value: 256 },
   { name: "職業大客車駕照", value: 512 },
   { name: "職業聯結車駕照", value: 1024 },
+];
+const allJobTimePeriod = [
+  { name: "日班", value: 1 },
+  { name: "夜班", value: 2 },
+  { name: "大夜班", value: 4 },
+  { name: "假日班", value: 8 },
 ];
 
 function NewMeetupForm(props) {
@@ -32,7 +39,6 @@ function NewMeetupForm(props) {
   //個人資料
   const cityInputRef = useRef();
   const streetInputRef = useRef();
-  const jobStatusInputRef = useRef();
   const honoraryDischargeYearInputRef = useRef();
   const honoraryDischargeMonthInputRef = useRef();
   const bioInputRef = useRef();
@@ -43,6 +49,12 @@ function NewMeetupForm(props) {
   const departmentsTypeInputRef = useRef([]);
   const eduDurationStartInputRef = useRef([]);
   const eduDurationEndInputRef = useRef([]);
+  //工作經歷
+  const companyNameInputRef = useRef();
+  const workAreaInputRef = useRef();
+  const jobNameInputRef = useRef();
+  //求職條件
+  const afterGetOfferInputRef = useRef();
 
   const [checkedLists, setCheckLists] = useState({});
   const checkedListHandler = (checkedList, type) => {
@@ -123,14 +135,14 @@ function NewMeetupForm(props) {
     const enteredBirthYear = birthYearInputRef.current.value;
     const enteredBirthMonth = birthMonthInputRef.current.value;
     const enteredBirthDate = birthDateInputRef.current.value;
-    const enteredGender =   checkedLists.gender;
+    const enteredGender = checkedLists.gender;
     const enteredCellphone = cellphoneInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     //個人資料
     const enteredCity = cityInputRef.current.value;
     const enteredStreet = streetInputRef.current.value;
-    const enteredJobStatus =   checkedLists.jobStatus;
-    const enteredMilitary =   checkedLists.military;
+    const enteredJobStatus = checkedLists.jobStatus;
+    const enteredMilitary = checkedLists.military;
     const enteredHonoraryDischargeYear =
       honoraryDischargeYearInputRef.current.value;
     const enteredHonoraryDischargeMonth =
@@ -142,7 +154,13 @@ function NewMeetupForm(props) {
     const enteredSchoolHightest = highestEduInputRef.current.checked;
     const department = departmentsHandler();
     const eduDuration = durationHandler();
-    const eduStatus =   checkedLists.status;
+    const eduStatus = checkedLists.status;
+    //工作經歷
+    const companyName = companyNameInputRef.current.value;
+    const workArea = workAreaInputRef.current.value;
+    const jobName = jobNameInputRef.current.value;
+    //求職條件
+    const onBoardAfterGetOffer = afterGetOfferInputRef.current.value;
 
     const meetupData = {
       familyName: enteredFamilyName,
@@ -167,6 +185,10 @@ function NewMeetupForm(props) {
       department: department,
       duration: eduDuration,
       status: +eduStatus,
+      companyName: companyName,
+      workArea: workArea,
+      jobName: jobName,
+      onBoardAfterGetOffer:onBoardAfterGetOffer,
     };
 
     console.log(meetupData);
@@ -503,6 +525,91 @@ function NewMeetupForm(props) {
             />
           </div>
         </section>
+
+        <h1>工作經歷</h1>
+
+        {/* 公司名稱​ */}
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="companyName">公司名稱​​</label>
+            <input type="text" id="companyName" ref={companyNameInputRef} />
+          </div>
+        </section>
+        {/* 工作地點 類目代碼 */}
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="workArea">工作地點</label>
+            <input
+              type="number"
+              id="workArea"
+              ref={workAreaInputRef}
+            />
+          </div>
+          {/* 職務名稱 */}
+        </section>
+        <div className={classes.control}>
+          <label htmlFor="jobName">職務名稱</label>
+          <input type="text" id="jobName" ref={jobNameInputRef} />
+        </div>
+
+        <h1>求職條件</h1>
+
+        {/* 上班時段 */}
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="jobTimePeriod">上班時段</label>
+          </div>
+          {allJobTimePeriod.map((jobTimePeriod, index) => (
+            <Checkbox
+              key={jobTimePeriod.name}
+              type="jobTimePeriod"
+              label={jobTimePeriod.name}
+              index={index}
+              value={jobTimePeriod.value}
+              getCheckedList={checkedListHandler}
+            />
+          ))}
+        </section>
+        <section>
+          {/* 可上班日 */}
+          <div className={classes.control}>
+            <label htmlFor="onBoardDate">可上班日</label>
+          </div>
+          <div>
+            <Radio
+              name="onBoardDate"
+              id="onBoarding"
+              value="1"
+              label="錄取後"
+              onChange={checkedListHandler}
+            />
+            <Radio
+              name="onBoardDate"
+              id="changeOnBoardDate"
+              value="-1"
+              label="自訂日期"
+              onChange={checkedListHandler}
+            />
+          </div>
+        </section>
+          {/* 錄取後可上班日 */}
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="onBoardAfterGetOffer">錄取後可上班日</label>
+            <select id="onBoardAfterGetOffer" ref={afterGetOfferInputRef}>
+              <option value="1">隨時</option>
+              <option value="2">1週</option>
+              <option value="3">2週</option>
+              <option value="4">一個月</option>
+              <option value="5">二個月</option>
+              <option value="6">三個月</option>
+            </select>
+          </div>
+        </section>
+        <section>
+          <InputTags/>
+        </section>
+
         <div className={classes.actions}>
           <button>Submit</button>
         </div>
