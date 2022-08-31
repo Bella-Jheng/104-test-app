@@ -12,7 +12,7 @@ const Checkbox = ({ type, label, index, value, getCheckedList }) => {
     if (checked === true && !isIncluded) {
       checkedList.push(value);
     } else if (checked === false && isIncluded) {
-      checkedList = checkedList.filter((val) => val != value);
+      checkedList = checkedList.filter((val) => val !== value);
     }
     getCheckedList(checkedList,type); 
   };
