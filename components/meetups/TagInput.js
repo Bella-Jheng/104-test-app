@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-const Tags = () => {
+const Tags = ({ data, handleDelete }) => {
   return (
     <Box
       sx={{
@@ -29,27 +29,36 @@ const Tags = () => {
   );
 };
 
-export default function InputTags() {
+export default function InputTags(props) {
   const [tags, SetTags] = useState([]);
+  const tagRef = useRef();
   const handleOnSubmit = (e) => {
-    e.preventDefault();
-    SetTags([...tags, tagRef.current.value]);
-    tagRef.current.value = "";
+    if (e.key === "Enter") {
+      SetTags([...tags, tagRef.current.value]);
+      tagRef.current.value = "";
+      props.inputTags(tags)
+    }
   };
 
   const handleDelete = (value) => {
     const newtags = tags.filter((val) => val !== value);
     SetTags(newtags);
+    props.inputTags(tags)
   };
+
+//   useEffect(()=>{
+//     props.inputTags(tags)
+//   },[tags])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <form onSubmit={handleOnSubmit}>
+      <div onKeyPress={handleOnSubmit}>
         <TextField
+          inputRef={tagRef}
           fullWidth
           variant="standard"
           size="small"
-          sx={{ margin: "1rem 0" }}
+          sx={{ margin: "0 0 0.5rem 0" }}
           margin="none"
           placeholder="Enter Tags here"
           InputProps={{
@@ -64,7 +73,7 @@ export default function InputTags() {
             ),
           }}
         />
-      </form>
+      </div>
     </Box>
   );
 }
