@@ -84,7 +84,6 @@ function NewMeetupForm(props) {
   const [checkedLists, setCheckLists] = useState();
   const checkedListHandler = (checkedList) => {
     setCheckLists(checkedList);
-    console.log(checkedLists);
   };
   //處理radio
   const [radioLists, setRadioLists] = useState({});
@@ -93,7 +92,6 @@ function NewMeetupForm(props) {
       ...prevState,
       [type]: radioList,
     }));
-    console.log(radioLists);
   };
 
   const [departmentList, setDepartmentList] = useState([]);
@@ -166,7 +164,6 @@ function NewMeetupForm(props) {
   };
 
   function submitHandler(event) {
-    event.preventDefault();
     //AC
     const activate = {
       familyName: familyNameInputRef.current.value,
@@ -187,7 +184,7 @@ function NewMeetupForm(props) {
       military: +radioLists.military,
       honoraryDischargeYear: +honoraryDischargeYearInputRef.current.value,
       honoraryDischargeMonth: +honoraryDischargeMonthInputRef.current.value,
-      driveCert: checkedLists.driveCert,
+      driveCert: checkedLists?.driveCert,
       bio: bioInputRef.current.value,
     };
     //學歷
@@ -207,7 +204,7 @@ function NewMeetupForm(props) {
     };
     //求職條件
     const jobCondition = {
-      jobTimePeriod: checkedLists.jobTimePeriod,
+      jobTimePeriod: checkedLists?.jobTimePeriod,
       onBoardDate: +radioLists.onBoardDate,
       onBoardAfterGetOffer: +afterGetOfferInputRef.current.value,
       customOnBoardDate: {
@@ -236,7 +233,7 @@ function NewMeetupForm(props) {
 
   return (
     <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form className={classes.form} >
         <h1>基本資料</h1>
         {/* 姓名 */}
         <section>
@@ -733,9 +730,10 @@ function NewMeetupForm(props) {
           <div className={classes.control}>
             <label htmlFor="onBoardAfterGetOffer">錄取後可上班日</label>
             <select id="onBoardAfterGetOffer" ref={afterGetOfferInputRef}>
-              <option value="1">隨時</option>
-              <option value="2">1週</option>
-              <option value="3">2週</option>
+              <option value="0">隨時</option>
+              <option value="1">1週</option>
+              <option value="2">2週</option>
+              <option value="3">3週</option>
               <option value="4">一個月</option>
               <option value="5">二個月</option>
               <option value="6">三個月</option>
@@ -825,7 +823,7 @@ function NewMeetupForm(props) {
         </section>
 
         <div className={classes.actions}>
-          <button>Submit</button>
+          <button type="button" onClick={submitHandler}>Submit</button>
         </div>
       </form>
     </Card>

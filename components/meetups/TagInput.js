@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect ,useRef, useState } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
@@ -36,19 +36,17 @@ export default function InputTags(props) {
     if (e.key === "Enter") {
       SetTags([...tags, +tagRef.current.value]);
       tagRef.current.value = "";
-      props.inputTags(tags)
     }
   };
 
   const handleDelete = (value) => {
     const newtags = tags.filter((val) => val !== value);
     SetTags(newtags);
-    props.inputTags(tags)
   };
 
-//   useEffect(()=>{
-//     props.inputTags(tags)
-//   },[tags])
+  useEffect(()=>{
+    props.inputTags(tags)
+  },[tags])
 
   return (
     <Box sx={{ flexGrow: 1 }}>

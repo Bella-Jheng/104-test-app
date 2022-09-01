@@ -19,11 +19,14 @@ const Checkbox = ({ name, id, label, value, getCheckedList }) => {
 
   const deliverList = (checkedList, value, checked) => {
     let isIncluded = checkedList.includes(value);
-    if (checked === true && !isIncluded) {
+
+    if (checked && !isIncluded) {
       checkedList.push(value);
-    } else if (checked === false && isIncluded) {
-      checkedList = checkedList.filter((val) => val !== value);
+    } else if (!checked && isIncluded) {
+      checkedList.filter((val) => val !== value)
     }
+    console.log(checkedList)
+    return checkedList;
   };
 
   return (
