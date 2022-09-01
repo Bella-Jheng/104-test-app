@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
@@ -34,7 +34,7 @@ export default function InputTags(props) {
   const tagRef = useRef();
   const handleOnSubmit = (e) => {
     if (e.key === "Enter") {
-      SetTags([...tags, tagRef.current.value]);
+      SetTags([...tags, +tagRef.current.value]);
       tagRef.current.value = "";
       props.inputTags(tags)
     }
@@ -54,6 +54,7 @@ export default function InputTags(props) {
     <Box sx={{ flexGrow: 1 }}>
       <div onKeyPress={handleOnSubmit}>
         <TextField
+          type='number'
           inputRef={tagRef}
           fullWidth
           variant="standard"

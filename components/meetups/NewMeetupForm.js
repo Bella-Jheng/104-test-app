@@ -26,6 +26,23 @@ const allJobTimePeriod = [
   { name: "假日班", value: 8 },
 ];
 
+//產生月份
+const months = () => {
+  const month = [];
+  for (let i = 1; i < 13; i++) {
+    month.push({ name: i + "月", value: i });
+  }
+  return month;
+};
+//產生日期
+const dates = () => {
+  const date = [];
+  for (let i = 1; i < 32; i++) {
+    date.push({ name: i + "日", value: i });
+  }
+  return date;
+};
+
 function NewMeetupForm(props) {
   //AC
   const familyNameInputRef = useRef();
@@ -53,19 +70,30 @@ function NewMeetupForm(props) {
   const companyNameInputRef = useRef();
   const workAreaInputRef = useRef();
   const jobNameInputRef = useRef();
+  const exptDurationStartInputRef = useRef([]);
+  const exptDurationEndInputRef = useRef([]);
   //求職條件
   const afterGetOfferInputRef = useRef();
+  const customOnBoardInputRef = useRef([]);
   const preferJobTitleInputRef = useRef();
   const preferJobContentInputRef = useRef();
   //平台傳的指定頁面
   const returnUrlInputRef = useRef();
 
-  const [checkedLists, setCheckLists] = useState({});
-  const checkedListHandler = (checkedList, type) => {
-    setCheckLists((prevState) => ({
+  //處理checkbox
+  const [checkedLists, setCheckLists] = useState();
+  const checkedListHandler = (checkedList) => {
+    setCheckLists(checkedList);
+    console.log(checkedLists);
+  };
+  //處理radio
+  const [radioLists, setRadioLists] = useState({});
+  const radioListHandler = (radioList, type) => {
+    setRadioLists((prevState) => ({
       ...prevState,
-      [type]: checkedList,
+      [type]: radioList,
     }));
+    console.log(radioLists);
   };
 
   const [departmentList, setDepartmentList] = useState([]);
@@ -117,95 +145,90 @@ function NewMeetupForm(props) {
   };
 
   const durationHandler = () => {
-    const durationStartYear = eduDurationStartInputRef.current[0].value;
-    const durationStartMonth = eduDurationStartInputRef.current[1].value;
-    const durationEndYear = eduDurationEndInputRef.current[0].value;
-    const durationEndMonth = eduDurationEndInputRef.current[1].value;
-
     return {
-      startYear: durationStartYear,
-      startMonth: +durationStartMonth,
-      endYear: durationEndYear,
-      endMonth: +durationEndMonth,
+      edu: {
+        startYear: eduDurationStartInputRef.current[0].value,
+        startMonth: +eduDurationStartInputRef.current[1].value,
+        endYear: eduDurationEndInputRef.current[0].value,
+        endMonth: +eduDurationEndInputRef.current[1].value,
+      },
+      experience: {
+        startYear: exptDurationStartInputRef.current[0].value,
+        startMonth: +exptDurationStartInputRef.current[1].value,
+        endYear: exptDurationEndInputRef.current[0].value,
+        endMonth: +exptDurationEndInputRef.current[1].value,
+      },
     };
   };
   const [preferWorkList, setPreferWorkList] = useState([]);
-  const inputTagsHandler = (inputTags)=>{
+  const inputTagsHandler = (inputTags) => {
     setPreferWorkList(inputTags);
-  }
+  };
 
   function submitHandler(event) {
     event.preventDefault();
     //AC
-    const enteredFamilyName = familyNameInputRef.current.value;
-    const enteredFirstName = firstNameInputRef.current.value;
-    const enteredIdentity = identityInputRef.current.value;
-    const enteredBirthYear = birthYearInputRef.current.value;
-    const enteredBirthMonth = birthMonthInputRef.current.value;
-    const enteredBirthDate = birthDateInputRef.current.value;
-    const enteredGender = checkedLists.gender;
-    const enteredCellphone = cellphoneInputRef.current.value;
-    const enteredEmail = emailInputRef.current.value;
+    const activate = {
+      familyName: familyNameInputRef.current.value,
+      firstName: firstNameInputRef.current.value,
+      identity: identityInputRef.current.value,
+      birthYear: +birthYearInputRef.current.value,
+      birthMonth: +birthMonthInputRef.current.value,
+      birthDate: +birthDateInputRef.current.value,
+      sex: +radioLists.gender,
+      cellphone: cellphoneInputRef.current.value,
+      email: emailInputRef.current.value,
+    };
     //個人資料
-    const enteredCity = cityInputRef.current.value;
-    const enteredStreet = streetInputRef.current.value;
-    const enteredJobStatus = checkedLists.jobStatus;
-    const enteredMilitary = checkedLists.military;
-    const enteredHonoraryDischargeYear =
-      honoraryDischargeYearInputRef.current.value;
-    const enteredHonoraryDischargeMonth =
-      honoraryDischargeMonthInputRef.current.value;
-    const enteredDriveCert = checkedLists.driveCert;
-    const enteredBio = bioInputRef.current.value;
+    const info = {
+      city: +cityInputRef.current.value,
+      street: streetInputRef.current.value,
+      jobStatus: +radioLists.jobStatus,
+      military: +radioLists.military,
+      honoraryDischargeYear: +honoraryDischargeYearInputRef.current.value,
+      honoraryDischargeMonth: +honoraryDischargeMonthInputRef.current.value,
+      driveCert: checkedLists.driveCert,
+      bio: bioInputRef.current.value,
+    };
     //學歷
-    const enteredSchoolName = schoolNameInputRef.current.value;
-    const enteredSchoolHightest = highestEduInputRef.current.checked;
-    const department = departmentsHandler();
-    const eduDuration = durationHandler();
-    const eduStatus = checkedLists.status;
+    const education = {
+      name: schoolNameInputRef.current.value,
+      highest: +highestEduInputRef.current.value,
+      department: departmentsHandler(),
+      duration: durationHandler().edu,
+      status: +radioLists.status,
+    };
     //工作經歷
-    const companyName = companyNameInputRef.current.value;
-    const workArea = workAreaInputRef.current.value;
-    const jobName = jobNameInputRef.current.value;
+    const experience = {
+      companyName: companyNameInputRef.current.value,
+      workArea: workAreaInputRef.current.value,
+      jobName: jobNameInputRef.current.value,
+      duration: durationHandler().experience,
+    };
     //求職條件
-    const onBoardAfterGetOffer = afterGetOfferInputRef.current.value;
-    const preferArea = preferWorkList;
-    const preferJobTitle = preferJobTitleInputRef.current.value;
-    const preferJobContent = preferJobContentInputRef.current.value;
+    const jobCondition = {
+      jobTimePeriod: checkedLists.jobTimePeriod,
+      onBoardDate: +radioLists.onBoardDate,
+      onBoardAfterGetOffer: +afterGetOfferInputRef.current.value,
+      customOnBoardDate: {
+        year: customOnBoardInputRef.current[0].value,
+        month: customOnBoardInputRef.current[1].value,
+        date: customOnBoardInputRef.current[2].value,
+      },
+      preferArea: preferWorkList,
+      preferJobTitle: preferJobTitleInputRef.current.value,
+      preferJobContent: preferJobContentInputRef.current.value,
+    };
     //平台傳的指定頁面
     const returnUrl = returnUrlInputRef.current.value;
 
     const meetupData = {
-      familyName: enteredFamilyName,
-      firstName: enteredFirstName,
-      identity: enteredIdentity,
-      birthYear: enteredBirthYear,
-      birthMonth: enteredBirthMonth,
-      birthDate: enteredBirthDate,
-      sex: +enteredGender,
-      cellphone: enteredCellphone,
-      email: enteredEmail,
-      city: +enteredCity,
-      street: enteredStreet,
-      jobStatus: +enteredJobStatus,
-      military: +enteredMilitary,
-      honoraryDischargeYear: enteredHonoraryDischargeYear,
-      honoraryDischargeMonth: enteredHonoraryDischargeMonth,
-      driveCert: enteredDriveCert,
-      bio: enteredBio,
-      name: enteredSchoolName,
-      highest: +enteredSchoolHightest,
-      department: department,
-      duration: eduDuration,
-      status: +eduStatus,
-      companyName: companyName,
-      workArea: workArea,
-      jobName: jobName,
-      onBoardAfterGetOffer: onBoardAfterGetOffer,
-      preferArea : preferArea,
-      preferJobTitle :preferJobTitle,
-      preferJobContent :preferJobContent,
-      returnUrl:returnUrl
+      activate,
+      info,
+      education,
+      experience,
+      jobCondition,
+      returnUrl: returnUrl,
     };
 
     console.log(meetupData);
@@ -216,49 +239,55 @@ function NewMeetupForm(props) {
       <form className={classes.form} onSubmit={submitHandler}>
         <h1>基本資料</h1>
         {/* 姓名 */}
-        <div className={`${classes.control} + ${classes.col2}`}>
-          <div>
-            <label htmlFor="familyName">姓</label>
-            <input type="text" id="familyName" ref={familyNameInputRef} />
+        <section>
+          <div className={`${classes.control} + ${classes.col2}`}>
+            <div>
+              <label htmlFor="familyName">姓</label>
+              <input type="text" id="familyName" ref={familyNameInputRef} />
+            </div>
+            <div>
+              <label htmlFor="firstName">名</label>
+              <input type="text" id="firstName" ref={firstNameInputRef} />
+            </div>
           </div>
-          <div>
-            <label htmlFor="firstName">名</label>
-            <input type="text" id="firstName" ref={firstNameInputRef} />
-          </div>
-        </div>
+        </section>
         {/* 身分證 */}
-        <div className={classes.control}>
-          <label htmlFor="identity">身分證</label>
-          <input type="text" id="identity" ref={identityInputRef} />
-        </div>
+        <section>
+          <div className={classes.control}>
+            <label htmlFor="identity">身分證</label>
+            <input type="text" id="identity" ref={identityInputRef} />
+          </div>
+        </section>
         {/* 生日 */}
-        <div className={`${classes.control} + ${classes.col3}`}>
-          <div>
-            <label htmlFor="birthYear">生日年</label>
-            <input type="number" id="birthYear" ref={birthYearInputRef} />
+        <section>
+          <div className={`${classes.control} + ${classes.col3}`}>
+            <div>
+              <label htmlFor="birthYear">生日年</label>
+              <input type="number" id="birthYear" ref={birthYearInputRef} />
+            </div>
+            <div>
+              <label htmlFor="birthMonth">生日月</label>
+              <select id="birthMonth" ref={birthMonthInputRef}>
+                {months().map((month) => (
+                  <option key={month.value + "birthMonth"} value={month.value}>
+                    {month.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="birthDate">生日日</label>
+              {/* <input type="number" id="birthDate" ref={birthDateInputRef} /> */}
+              <select id="birthDate" ref={birthDateInputRef}>
+                {dates().map((date) => (
+                  <option key={date.value + "birthDate"} value={date.value}>
+                    {date.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div>
-            <label htmlFor="birthMonth">生日月</label>
-            <select id="birthMonth" ref={birthMonthInputRef}>
-              <option value="1">1月</option>
-              <option value="2">2月</option>
-              <option value="3">3月</option>
-              <option value="4">4月</option>
-              <option value="5">5月</option>
-              <option value="6">6月</option>
-              <option value="7">7月</option>
-              <option value="8">8月</option>
-              <option value="9">9月</option>
-              <option value="10">10月</option>
-              <option value="11">11月</option>
-              <option value="12">12月</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="birthDate">生日日</label>
-            <input type="number" id="birthDate" ref={birthDateInputRef} />
-          </div>
-        </div>
+        </section>
         {/* 性別 */}
         <section className={classes.section}>
           <div className={classes.control}>
@@ -270,14 +299,14 @@ function NewMeetupForm(props) {
               id="girl"
               value="0"
               label="女"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
             <Radio
               name="gender"
               id="boy"
               value="1"
               label="男"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
           </div>
         </section>
@@ -302,7 +331,7 @@ function NewMeetupForm(props) {
         <section className={classes.section}>
           <div className={`${classes.control} + ${classes.col2}`}>
             <div>
-              <label htmlFor="city">通訊地址-地區</label>
+              <label htmlFor="city">通訊地址-地區 類目代碼</label>
               <input type="number" id="city" ref={cityInputRef} />
             </div>
             <div>
@@ -321,14 +350,14 @@ function NewMeetupForm(props) {
             id="working"
             value="1"
             label="仍在職"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="jobStatus"
             id="waiting"
             value="2"
             label="待業中"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
         </section>
         <section className={classes.section}>
@@ -340,42 +369,42 @@ function NewMeetupForm(props) {
             id="woman"
             value="0"
             label="未曾設定或女性"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="military"
             id="ending"
             value="1"
             label="役畢"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="military"
             id="retirement"
             value="2"
             label="屆退"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="military"
             id="serving"
             value="3"
             label="未役"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="military"
             id="standby"
             value="4"
             label="待役"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
           <Radio
             name="military"
             id="exempted"
             value="5"
             label="免役"
-            onChange={checkedListHandler}
+            onChange={radioListHandler}
           />
         </section>
         {/* 退伍日期 */}
@@ -395,18 +424,14 @@ function NewMeetupForm(props) {
                 id="honoraryDischargeMonth"
                 ref={honoraryDischargeMonthInputRef}
               >
-                <option value="1">1月</option>
-                <option value="2">2月</option>
-                <option value="3">3月</option>
-                <option value="4">4月</option>
-                <option value="5">5月</option>
-                <option value="6">6月</option>
-                <option value="7">7月</option>
-                <option value="8">8月</option>
-                <option value="9">9月</option>
-                <option value="10">10月</option>
-                <option value="11">11月</option>
-                <option value="12">12月</option>
+                {months().map((month) => (
+                  <option
+                    key={month.value + "honoraryDischarge"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -419,10 +444,10 @@ function NewMeetupForm(props) {
           {allDriveCert.map((driveCert, index) => (
             <Checkbox
               key={driveCert.name}
-              type="driveCert"
-              label={driveCert.name}
-              index={index}
+              id={"driveCert" + index}
+              name="driveCert"
               value={driveCert.value}
+              label={driveCert.name}
               getCheckedList={checkedListHandler}
             />
           ))}
@@ -475,7 +500,7 @@ function NewMeetupForm(props) {
               />
             </div>
             <div>
-              <label htmlFor="departmentsType">科系類別</label>
+              <label htmlFor="departmentsType">科系 類目代碼</label>
               <input
                 type="number"
                 id="departmentsType"
@@ -507,11 +532,20 @@ function NewMeetupForm(props) {
             </div>
             <div>
               <label htmlFor="eduDurationStartMonth">月</label>
-              <input
+              <select
                 type="number"
                 id="eduDurationStartMonth"
                 ref={(val) => (eduDurationStartInputRef.current[1] = val)}
-              />
+              >
+                {months().map((month) => (
+                  <option
+                    key={month.value + "eduDurationStart"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <p> ~ </p>
             <div>
@@ -524,11 +558,20 @@ function NewMeetupForm(props) {
             </div>
             <div>
               <label htmlFor="eduDurationEndMonth">月</label>
-              <input
+              <select
                 type="number"
                 id="eduDurationEndMonth"
                 ref={(val) => (eduDurationEndInputRef.current[1] = val)}
-              />
+              >
+                {months().map((month) => (
+                  <option
+                    key={month.value + "eduDurationEndMonth"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </section>
@@ -543,21 +586,21 @@ function NewMeetupForm(props) {
               id="graduated"
               value="1"
               label="畢業"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
             <Radio
               name="status"
               id="unfinished"
               value="2"
               label="肄業"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
             <Radio
               name="status"
               id="studying"
               value="3"
               label="就學中"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
           </div>
         </section>
@@ -574,16 +617,75 @@ function NewMeetupForm(props) {
         {/* 工作地點 類目代碼 */}
         <section className={classes.section}>
           <div className={classes.control}>
-            <label htmlFor="workArea">工作地點</label>
+            <label htmlFor="workArea">工作地點 類目代碼</label>
             <input type="number" id="workArea" ref={workAreaInputRef} />
           </div>
         </section>
         {/* 職務名稱 */}
         <section className={classes.section}>
-        <div className={classes.control}>
-          <label htmlFor="jobName">職務名稱</label>
-          <input type="text" id="jobName" ref={jobNameInputRef} />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="jobName">職務名稱</label>
+            <input type="text" id="jobName" ref={jobNameInputRef} />
+          </div>
+        </section>
+        {/* 任職期間 */}
+        <section className={classes.section}>
+          <div className={classes.control}>
+            <label htmlFor="exptDuration">任職期間</label>
+          </div>
+          <div className={`${classes.control} + ${classes.col5}`}>
+            <div>
+              <label htmlFor="exptDurationStartYear">年</label>
+              <input
+                type="number"
+                id="exptDurationStartYear"
+                ref={(val) => (exptDurationStartInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="exptDurationStartMonth">月</label>
+              <select
+                type="number"
+                id="exptDurationStartMonth"
+                ref={(val) => (exptDurationStartInputRef.current[1] = val)}
+              >
+                {months().map((month) => (
+                  <option
+                    key={month.value + "exptDurationStartMonth"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <p> ~ </p>
+            <div>
+              <label htmlFor="exptDurationEndYear">年</label>
+              <input
+                type="number"
+                id="exptDurationEndYear"
+                ref={(val) => (exptDurationEndInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="exptDurationEndMonth">月</label>
+              <select
+                type="number"
+                id="exptDurationnEndMonth"
+                ref={(val) => (exptDurationEndInputRef.current[1] = val)}
+              >
+                {months().map((month) => (
+                  <option
+                    key={month.value + "exptDurationEndMonth"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </section>
 
         <h1>求職條件</h1>
@@ -596,10 +698,10 @@ function NewMeetupForm(props) {
           {allJobTimePeriod.map((jobTimePeriod, index) => (
             <Checkbox
               key={jobTimePeriod.name}
-              type="jobTimePeriod"
-              label={jobTimePeriod.name}
-              index={index}
+              id={"jobTimePeriod" + index}
+              name="jobTimePeriod"
               value={jobTimePeriod.value}
+              label={jobTimePeriod.name}
               getCheckedList={checkedListHandler}
             />
           ))}
@@ -615,14 +717,14 @@ function NewMeetupForm(props) {
               id="onBoarding"
               value="1"
               label="錄取後"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
             <Radio
               name="onBoardDate"
               id="changeOnBoardDate"
               value="-1"
               label="自訂日期"
-              onChange={checkedListHandler}
+              onChange={radioListHandler}
             />
           </div>
         </section>
@@ -640,6 +742,51 @@ function NewMeetupForm(props) {
             </select>
           </div>
         </section>
+        {/* 最快可上班日期 */}
+        <section>
+          <div className={`${classes.control} + ${classes.col3}`}>
+            <div>
+              <label htmlFor="customOnBoardYear">最快可上班年</label>
+              <input
+                type="number"
+                id="customOnBoardYear"
+                ref={(val) => (customOnBoardInputRef.current[0] = val)}
+              />
+            </div>
+            <div>
+              <label htmlFor="customOnBoardMonth">月</label>
+              <select
+                id="customOnBoardMonth"
+                ref={(val) => (customOnBoardInputRef.current[1] = val)}
+              >
+                {months().map((month) => (
+                  <option
+                    key={month.value + "customOnBoardMonth"}
+                    value={month.value}
+                  >
+                    {month.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="customOnBoardDate">日</label>
+              <select
+                id="customOnBoardDate"
+                ref={(val) => (customOnBoardInputRef.current[2] = val)}
+              >
+                {dates().map((date) => (
+                  <option
+                    key={date.value + "customOnBoardDate"}
+                    value={date.value}
+                  >
+                    {date.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </section>
         {/* 希望地點 類目代碼 */}
         <section className={classes.section}>
           <div className={classes.control}>
@@ -653,7 +800,6 @@ function NewMeetupForm(props) {
             <label htmlFor="preferJobTitle">希望職稱</label>
             <input
               type="text"
-              required
               id="preferJobTitle"
               ref={preferJobTitleInputRef}
             />
@@ -663,19 +809,18 @@ function NewMeetupForm(props) {
         <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="preferJobContent">希望工作內容</label>
-            <textarea type="text" id="preferJobContent" ref={preferJobContentInputRef} />
+            <textarea
+              type="text"
+              id="preferJobContent"
+              ref={preferJobContentInputRef}
+            />
           </div>
         </section>
         {/* 平台傳的指定頁面 */}
         <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="returnUrl">平台傳的指定頁面</label>
-            <input
-              type="text"
-              required
-              id="returnUrl"
-              ref={returnUrlInputRef}
-            />
+            <input type="text" id="returnUrl" ref={returnUrlInputRef} />
           </div>
         </section>
 
