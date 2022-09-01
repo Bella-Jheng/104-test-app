@@ -26,7 +26,6 @@ const Checkbox = ({ name, id, label, value, getCheckedList }) => {
     } else if (!checked && isIncluded) {
       checkedList.splice(index,1)
     }
-    console.log(checkedList)
     return checkedList;
   };
 
