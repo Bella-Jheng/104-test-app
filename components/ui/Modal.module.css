@@ -1,0 +1,67 @@
+.Modal {
+  position: fixed;
+  z-index: 200;
+  top: 30%;
+  left: 40%;
+  width: 25%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.8s ease-out;
+}
+
+.ModalOpen {
+    animation: openModal 0.4s ease-out forwards;
+}
+
+.ModalClose {
+    animation: closeModal 0.4s ease-out forwards;
+}
+
+.Button {
+    border:1px solid #521751;
+    font: inherit;
+    padding:8px;
+    background-color: #521751;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.Button:hover,
+.Button:active {
+  background-color: #fa923f;
+}
+
+@keyframes openModal {
+    0%{
+        pointer-events: none;
+        transform: translateY(-100vh);
+    }
+    50%{
+        pointer-events: auto;
+        transform: translateY(20%);
+    }
+    100%{
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeModal {
+    0%{
+       pointer-events: auto;
+       transform: translateY(0);
+    }
+    50%{
+        pointer-events: auto;
+        transform: translateY(20%);
+    }
+    100%{
+        pointer-events: none;
+        transform: translateY(-100vh);
+    }
+}

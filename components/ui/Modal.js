@@ -1,20 +1,36 @@
-import styled from "styled-components";
-import CloseIcon from "@mui/icons-material/Close";
-
-const Backdrop = styled.div`
-  background: blue;
-  width : 100 vw;
-  height : 100 vh;
-`;
-
-const ModalContainer = styled.div``;
-const Modalcontent = styled.div``;
-const ModalClose = styled.div``;
+import classes from "./Modal.module.css";
+import CSSTransition from "react-transition-group/CSSTransition";
 
 const Modal = (props) => {
-  return(<Backdrop>
-
-  </Backdrop>)
+  const animation = {
+    enter: 400,
+    exit: 1000,
+  };
+  return (
+    <CSSTransition
+      in={props.show}
+      timeout={animation}
+      mountOnEnter
+      unmountOnExit
+      classNames={{
+        enter: "",
+        enterActive: classes.ModalOpen,
+        exit: "",
+        exitActive: classes.ModalClose,
+      }}
+    >
+      <div className={classes.Modal + " "}>
+        {
+          <h3>
+            {props.errorMessage ? props.errorMessage : "平台資料送出成功！"}
+          </h3>
+        }
+        <button type="button" className={classes.Button} onClick={props.close}>
+          關閉
+        </button>
+      </div>
+    </CSSTransition>
+  );
 };
 
 export default Modal;

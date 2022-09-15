@@ -5,6 +5,8 @@ import classes from "./NewMeetupForm.module.css";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import InputTags from "./TagInput";
+import Modal from '../ui/Modal';
+import Backdrop from "../ui/Backdrop";
 import useHttp from "../hook/use-http";
 
 const allDriveCert = [
@@ -44,8 +46,17 @@ const dates = () => {
   return date;
 };
 
-function NewMeetupForm(props) {
+function NewMeetupForm() {
   const {isLoading,error,sendRequest}=useHttp();
+  const [modalIsOpen, setModalIsOpen] =useState(false)
+
+  const openModal =()=>{
+    setModalIsOpen(true)
+  }
+
+  const closeModal =()=>{
+    setModalIsOpen(false)
+  }
 
   //AC
   const familyNameInputRef = useRef();
@@ -239,10 +250,12 @@ function NewMeetupForm(props) {
       },
       body:meetupData
     }
-    const response = sendRequest(requestConfig)
+    // const response = sendRequest(requestConfig)
+
+    openModal();
 
     console.log('request data : ' + meetupData)
-    console.log('API result message : '+response);
+    // console.log('API result message : '+response);
   }
 
   return (
@@ -835,6 +848,11 @@ function NewMeetupForm(props) {
             <input type="text" id="returnUrl" ref={returnUrlInputRef} />
           </div>
         </section>
+        
+        <Modal show={modalIsOpen} close={closeModal} errorMessage={error}/>
+        {modalIsOpen && (
+          <Backdrop show={modalIsOpen} close={closeModal} />
+        )}
 
         <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
