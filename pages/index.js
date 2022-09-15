@@ -1,11 +1,8 @@
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
+import Modal from "../components/ui/Modal";
 
 function NewMeetupPage(){
-const onAddMeetup =(meetupData)=>{
-    console.log(meetupData)
-}
-
-    return <NewMeetupForm addMeetupHandler={onAddMeetup}></NewMeetupForm>
+    return(<> <Modal/> <NewMeetupForm /></>);
 }
 
 export default NewMeetupPage;

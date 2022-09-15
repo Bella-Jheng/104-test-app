@@ -5,6 +5,7 @@ import classes from "./NewMeetupForm.module.css";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import InputTags from "./TagInput";
+import useHttp from "../hook/use-http";
 
 const allDriveCert = [
   { name: "輕型機車駕照", value: 1 },
@@ -44,6 +45,8 @@ const dates = () => {
 };
 
 function NewMeetupForm(props) {
+  const {isLoading,error,sendRequest}=useHttp();
+
   //AC
   const familyNameInputRef = useRef();
   const firstNameInputRef = useRef();
@@ -228,7 +231,17 @@ function NewMeetupForm(props) {
       returnUrl: returnUrl,
     };
 
-    console.log(meetupData);
+    const requestConfig ={
+      method : true,
+      headers: {
+        'content-type': 'application/json'
+      },
+      body:meetupData
+    }
+    const response = sendRequest(requestConfig)
+
+    console.log('request data : ' + meetupData)
+    console.log('API result message : '+response);
   }
 
   return (
@@ -823,6 +836,7 @@ function NewMeetupForm(props) {
         </section>
 
         <div className={classes.actions}>
+          {isLoading && <p> is Loading...</p>}
           <button type="button" onClick={submitHandler}>Submit</button>
         </div>
       </form>
