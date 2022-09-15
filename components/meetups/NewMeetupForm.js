@@ -232,6 +232,7 @@ function NewMeetupForm(props) {
     };
 
     const requestConfig ={
+      url:'https://pda.104-dev.com.tw/activate/preparative',
       method : true,
       headers: {
         'content-type': 'application/json'
