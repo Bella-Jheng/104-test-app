@@ -177,7 +177,7 @@ function NewMeetupForm() {
     setPreferWorkList(inputTags);
   };
 
-  async function submitHandler() {
+  async function submitHandler(event) {
     //AC
     const activate = {
       familyName: familyNameInputRef.current.value,
@@ -242,8 +242,12 @@ function NewMeetupForm() {
       returnUrl: returnUrl,
     };
     // openModal();
-    console.log(JSON.stringify(meetupData))
-    return JSON.stringify(meetupData);
+   
+    document.getElementById("formData").value =JSON.stringify(meetupData)
+    console.log(document.getElementById("formData").value)
+    document.getElementById("submitForm").submit();
+   
+    // return JSON.stringify(meetupData);
 
     // const requestConfig = {
     //   url: "https://pda.104-dev.com.tw/activate/preparative",
@@ -864,16 +868,17 @@ function NewMeetupForm() {
         action="https://pda.104-dev.com.tw/activate/preparative"
         target="_blank"
         method="post"
+        id='submitForm'
       >
         <input
           type="hidden"
-          value={submitHandler()}
-          defaultValue=''
+          value=''
+          id="formData"
         />
-        {submitHandler().toString()}
+        {/* {submitHandler().toString()} */}
         <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
-          <button type="submit"> Submit
+          <button type="button" onClick={submitHandler}> Submit
           </button> 
         </div>
       </form>
