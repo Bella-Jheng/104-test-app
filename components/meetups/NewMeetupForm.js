@@ -247,6 +247,7 @@ function NewMeetupForm() {
       method: 'POST',
       headers: {
         "content-type": "application/json",
+        'Access-Control-Request-Private-Network':'true'
       },
       body: meetupData,
     };
