@@ -10,6 +10,7 @@ const useHttp = () => {
     try {
       const response = await fetch(requestConfig.url, {
         method: "POST",
+        mode:requestConfig.mode,
         headers: requestConfig.headers ? requestConfig.headers : {},
         body: JSON.stringify(requestConfig.body)
           ? JSON.stringify(requestConfig.body)
