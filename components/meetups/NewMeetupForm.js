@@ -254,7 +254,7 @@ function NewMeetupForm() {
 
     console.log("request data : " +  JSON.stringify(meetupData));
     console.log("API result message : " + JSON.stringify(response));
-
+    console.log("Error message : " + error);
     openModal();
   }
 
