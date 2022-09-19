@@ -243,7 +243,7 @@ function NewMeetupForm() {
     };
 
     const requestConfig = {
-      url: "https://pda.104-dev.com.tw/activate/preparative",
+      url: "https://pda.104-dev.com.tw/activate/preparative/relay",
       method: true,
       headers: {
         "content-type": "application/json",
