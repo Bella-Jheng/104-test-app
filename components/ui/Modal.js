@@ -2,6 +2,8 @@ import classes from "./Modal.module.css";
 import CSSTransition from "react-transition-group/CSSTransition";
 
 const Modal = (props) => {
+  const errorMessage = props.errorMessage?.toString()
+  console.log(errorMessage)
   const animation = {
     enter: 400,
     exit: 1000,
@@ -20,11 +22,8 @@ const Modal = (props) => {
       }}
     >
       <div className={classes.Modal + " "}>
-        {
-          <h3>
-            {props.errorMessage ? props.errorMessage : "平台資料送出成功！"}
-          </h3>
-        }
+        {props.errorMessage && <h3>{errorMessage}</h3>} 
+        {!props.errorMessage && <h3>平台資料已成功送出</h3>}
         <button type="button" className={classes.Button} onClick={props.close}>
           關閉
         </button>

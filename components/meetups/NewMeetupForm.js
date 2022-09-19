@@ -251,10 +251,8 @@ function NewMeetupForm() {
       body: meetupData,
     };
     const response =await sendRequest(requestConfig);
-
     console.log("request data : " +  JSON.stringify(meetupData));
     console.log("API result message : " + JSON.stringify(response));
-    console.log("Error message : " + error);
     openModal();
   }
 
