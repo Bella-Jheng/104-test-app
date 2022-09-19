@@ -244,7 +244,6 @@ function NewMeetupForm() {
 
     const requestConfig = {
       url: "https://pda.104-dev.com.tw/activate/preparative",
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         "content-type": "application/json",
