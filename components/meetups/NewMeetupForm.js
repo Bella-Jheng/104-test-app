@@ -177,7 +177,7 @@ function NewMeetupForm() {
     setPreferWorkList(inputTags);
   };
 
-  async function  submitHandler (event) {
+  async function submitHandler() {
     //AC
     const activate = {
       familyName: familyNameInputRef.current.value,
@@ -241,20 +241,22 @@ function NewMeetupForm() {
       jobCondition,
       returnUrl: returnUrl,
     };
+    // openModal();
+    console.log(JSON.stringify(meetupData))
+    return JSON.stringify(meetupData);
 
-    const requestConfig = {
-      url: "https://pda.104-dev.com.tw/activate/preparative",
-      method: 'POST',
-      headers: {
-        "content-type": "application/json",
-        'Access-Control-Request-Private-Network':'true'
-      },
-      body: meetupData,
-    };
-    const response =await sendRequest(requestConfig);
-    console.log("request data : " +  JSON.stringify(meetupData));
-    console.log("API result message : " + JSON.stringify(response));
-    openModal();
+    // const requestConfig = {
+    //   url: "https://pda.104-dev.com.tw/activate/preparative",
+    //   method: 'POST',
+    //   headers: {
+    //     "content-type": "application/json",
+    //     'Access-Control-Request-Private-Network':'true'
+    //   },
+    //   body: meetupData,
+    // };
+    // const response = await sendRequest(requestConfig);
+    // console.log("request data : " +  JSON.stringify(meetupData));
+    // console.log("API result message : " + JSON.stringify(response));
   }
 
   return (
@@ -851,11 +853,28 @@ function NewMeetupForm() {
         <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
         {modalIsOpen && <Backdrop show={modalIsOpen} close={closeModal} />}
 
-        <div className={classes.actions}>
+        {/* <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
           <button type="button" onClick={submitHandler}>
             Submit
-          </button>
+          </button> 
+        </div> */}
+      </form>
+      <form
+        action="https://pda.104-dev.com.tw/activate/preparative"
+        target="_blank"
+        method="post"
+      >
+        <input
+          type="hidden"
+          value={submitHandler()}
+          defaultValue=''
+        />
+        {submitHandler().toString()}
+        <div className={classes.actions}>
+          {isLoading && <p> is Loading...</p>}
+          <button type="submit"> Submit
+          </button> 
         </div>
       </form>
     </Card>
