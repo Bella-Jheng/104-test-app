@@ -177,7 +177,7 @@ function NewMeetupForm() {
     setPreferWorkList(inputTags);
   };
 
-  function submitHandler(event) {
+  async function  submitHandler (event) {
     //AC
     const activate = {
       familyName: familyNameInputRef.current.value,
@@ -250,7 +250,7 @@ function NewMeetupForm() {
       },
       body: meetupData,
     };
-    const response = await sendRequest(requestConfig);
+    const response =await sendRequest(requestConfig);
 
     console.log("request data : " +  JSON.stringify(meetupData));
     console.log("API result message : " + response);
