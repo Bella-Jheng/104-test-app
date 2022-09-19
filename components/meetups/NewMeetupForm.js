@@ -5,7 +5,7 @@ import classes from "./NewMeetupForm.module.css";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import InputTags from "./TagInput";
-import Modal from '../ui/Modal';
+import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
 import useHttp from "../hook/use-http";
 
@@ -47,16 +47,16 @@ const dates = () => {
 };
 
 function NewMeetupForm() {
-  const {isLoading,error,sendRequest}=useHttp();
-  const [modalIsOpen, setModalIsOpen] =useState(false)
+  const { isLoading, error, sendRequest } = useHttp();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const openModal =()=>{
-    setModalIsOpen(true)
-  }
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
 
-  const closeModal =()=>{
-    setModalIsOpen(false)
-  }
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   //AC
   const familyNameInputRef = useRef();
@@ -242,25 +242,25 @@ function NewMeetupForm() {
       returnUrl: returnUrl,
     };
 
-    const requestConfig ={
-      url:'https://pda.104-dev.com.tw/activate/preparative',
-      method : true,
+    const requestConfig = {
+      url: "https://pda.104-dev.com.tw/activate/preparative",
+      method: true,
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body:meetupData
-    }
-    const response = sendRequest(requestConfig)
+      body: meetupData,
+    };
+    const response = sendRequest(requestConfig);
+
+    console.log("request data : " + JSON.stringify(meetupData));
+    console.log("API result message : " + response);
 
     openModal();
-
-    console.log('request data : ' + meetupData)
-    console.log('API result message : '+response);
   }
 
   return (
     <Card>
-      <form className={classes.form} >
+      <form className={classes.form}>
         <h1>基本資料</h1>
         {/* 姓名 */}
         <section>
@@ -848,15 +848,15 @@ function NewMeetupForm() {
             <input type="text" id="returnUrl" ref={returnUrlInputRef} />
           </div>
         </section>
-        
-        <Modal show={modalIsOpen} close={closeModal} errorMessage={error}/>
-        {modalIsOpen && (
-          <Backdrop show={modalIsOpen} close={closeModal} />
-        )}
+
+        <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
+        {modalIsOpen && <Backdrop show={modalIsOpen} close={closeModal} />}
 
         <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
-          <button type="button" onClick={submitHandler}>Submit</button>
+          <button type="button" onClick={submitHandler}>
+            Submit
+          </button>
         </div>
       </form>
     </Card>
