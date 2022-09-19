@@ -244,7 +244,7 @@ function NewMeetupForm() {
 
     const requestConfig = {
       url: "https://pda.104-dev.com.tw/activate/preparative/relay",
-      method: true,
+      method: 'POST',
       headers: {
         "content-type": "application/json",
       },

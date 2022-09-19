@@ -9,7 +9,7 @@ const useHttp = () => {
     setError(null);
     try {
       const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? "POST" : "GET",
+        method: "POST",
         headers: requestConfig.headers ? requestConfig.headers : {},
         body: JSON.stringify(requestConfig.body)
           ? JSON.stringify(requestConfig.body)
