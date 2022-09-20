@@ -242,11 +242,10 @@ function NewMeetupForm() {
       returnUrl: returnUrl,
     };
     // openModal();
-   
-    document.getElementById("formData").value =JSON.stringify(meetupData)
-    console.log(document.getElementById("formData").value)
-    document.getElementById("submitForm").submit();
-   
+
+    document.getElementById("formData").value = JSON.stringify(meetupData);
+
+    //9/19 嘗試用 fetch 送資料，但有 CORS 問題，所以改用form表單送
     // return JSON.stringify(meetupData);
 
     // const requestConfig = {
@@ -262,6 +261,10 @@ function NewMeetupForm() {
     // console.log("request data : " +  JSON.stringify(meetupData));
     // console.log("API result message : " + JSON.stringify(response));
   }
+
+  const submitForm = () => {
+    document.getElementById("submitForm").submit();
+  };
 
   return (
     <Card>
@@ -857,30 +860,34 @@ function NewMeetupForm() {
         <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
         {modalIsOpen && <Backdrop show={modalIsOpen} close={closeModal} />}
 
-        {/* <div className={classes.actions}>
+        <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
           <button type="button" onClick={submitHandler}>
-            Submit
-          </button> 
-        </div> */}
+            Update Data
+          </button>
+        </div>
       </form>
       <form
+        className={classes.form}
         action="https://pda.104-dev.com.tw/activate/preparative"
         target="_blank"
         method="post"
-        id='submitForm'
+        id="submitForm"
       >
-        <input
-          type="hidden"
-          value=''
-          id="formData"
-        />
-        {/* {submitHandler().toString()} */}
-        <div className={classes.actions}>
-          {isLoading && <p> is Loading...</p>}
-          <button type="button" onClick={submitHandler}> Submit
-          </button> 
-        </div>
+        <section className={classes.section}>
+          <div className={classes.control}>
+          <label htmlFor="">送出資料</label>
+            <textarea type="text" value="" id="formData" />
+          </div>
+          {/* {submitHandler().toString()} */}
+          <div className={classes.actions}>
+            {isLoading && <p> is Loading...</p>}
+            <button type="button" onClick={submitForm}>
+              {" "}
+              Submit
+            </button>
+          </div>
+        </section>
       </form>
     </Card>
   );
