@@ -243,7 +243,7 @@ function NewMeetupForm() {
     };
     // openModal();
 
-    // document.getElementById("formData").value = JSON.stringify(meetupData);
+    document.getElementById("formData").value = JSON.stringify(meetupData);
 
     //9/19 嘗試用 fetch 送資料，但有 CORS 問題，所以改用form表單送
     // return JSON.stringify(meetupData);
@@ -253,18 +253,17 @@ function NewMeetupForm() {
       method: 'POST',
       headers: {
         "content-type": "application/json",
-        'Access-Control-Request-Private-Network':'true'
       },
       body: meetupData,
     };
-    const response = await sendRequest(requestConfig);
-    console.log("request data : " +  JSON.stringify(meetupData));
-    console.log("API result message : " + JSON.stringify(response));
+    // const response = await sendRequest(requestConfig);
+    // console.log("request data : " +  JSON.stringify(meetupData));
+    // console.log("API result message : " + JSON.stringify(response));
   }
 
-  // const submitForm = () => {
-  //   document.getElementById("submitForm").submit();
-  // };
+  const submitForm = () => {
+    document.getElementById("submitForm").submit();
+  };
 
   return (
     <Card>
@@ -867,7 +866,7 @@ function NewMeetupForm() {
           </button>
         </div>
       </form>
-      {/* <form
+      <form
         className={classes.form}
         action="https://pda.104-dev.com.tw/activate/preparative"
         target="_blank"
@@ -887,7 +886,7 @@ function NewMeetupForm() {
             </button>
           </div>
         </section>
-      </form> */}
+      </form>
     </Card>
   );
 }
