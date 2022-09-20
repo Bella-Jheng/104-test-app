@@ -250,7 +250,7 @@ function NewMeetupForm() {
 
     const requestConfig = {
       url: "https://pda.104-dev.com.tw/activate/preparative",
-      method: 'POST',
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
@@ -893,6 +893,66 @@ function NewMeetupForm() {
           </div>
         </section>
       </form> */}
+      <form
+        id="form"
+        action="https://pda.104-dev.com.tw/activate/preparative"
+        method="post"
+        tagart="_blank"
+      >
+familyName<input name="activate[familyName]" value="陳"></input><br/>
+    firstName<input name="activate[firstName]" value="tester"></input><br/>
+    cellphone<input name="activate[cellphone]" value="0912345678"></input><br/>
+    identity<input name="activate[identity]" value="A141400874"></input><br/>
+    identityType<input name="activate[identityType]" value="0"></input><br/>
+    birthYear<input name="activate[birthYear]" value="2000"></input><br/>
+    birthMonth<input name="activate[birthMonth]" value="12"></input><br/>
+    birthDate<input name="activate[birthDate]" value="1"></input><br/>
+    sex<input name="activate[sex]" value="1"></input><br/>
+    email<input name="activate[email]" value="ting123@104.com.tw"></input><br/>
+    <hr/>
+    city<input name="info[city]" value="6001001001"></input><br/>
+    street<input name="info[street]" value="寶中路1巷1弄1號"></input><br/>
+    jobStatus<input name="info[jobStatus]" value="1"></input><br/>
+    military<input name="info[military]" value="1"></input><br/>
+    honoraryDischargeYear<input name="info[honoraryDischargeYear]" value="2011"></input><br/>
+    honoraryDischargeMonth<input name="info[honoraryDischargeMonth]" value="1"></input><br/>
+    driveCert[0]<input name="info[driveCert][0]" value="1"></input><br/>
+    driveCert[1]<input name="info[driveCert][1]" value="4"></input><br/>
+    bio<input name="info[bio]" value="大家好！！！"></input><br/>
+    <hr/>
+    name<input name="education[name]" value="一零四大學"></input><br/>
+    highest<input name="education[highest]" value="1"></input><br/>
+    departments[0] name<input name="education[departments][0][name]" value="化工1"></input><br/>
+    departments[0] type[0]<input name="education[departments][0][type][0]" value="3016002000"></input><br/>
+    departments[1] name<input name="education[departments][0][name]" value="工化2"></input><br/>
+    departments[1] type[0]<input name="education[departments][0][type][0]" value="3001002000"></input><br/>
+    duration startYear<input name="education[duration][startYear]" value="2001"></input><br/>
+    duration startMonth<input name="education[duration][startMonth]" value="12"></input><br/>
+    duration endYear<input name="education[duration][endYear]" value="2003"></input><br/>
+    duration endMonth<input name="education[duration][endMonth]" value="1"></input><br/>
+    status<input name="education[status]" value="1"></input><br/>
+    <hr/>
+    companyName<input name="experience[companyName]" value="104公司"></input><br/>
+    workArea<input name="experience[workArea]" value="6001018001"></input><br/>
+    jobName<input name="experience[jobName]" value="104職務"></input><br/>
+    duration startYear<input name="experience[duration][startYear]" value="2009"></input><br/>
+    duration startMonth<input name="experience[duration][startMonth]" value="2"></input><br/>
+    duration endYear<input name="experience[duration][endYear]" value="2010"></input><br/>
+    duration endMonth<input name="experience[duration][endMonth]" value="2"></input><br/>
+    <hr/>
+    jobTimePeriod[0]<input name="jobCondition[jobTimePeriod][0]" value="1"></input><br/>
+    jobTimePeriod[1]<input name="jobCondition[jobTimePeriod][1]" value="2"></input><br/>
+    onBoardDate<input name="jobCondition[onBoardDate]" value="1"></input><br/>
+    onBoardAfterGetOffer<input name="jobCondition[onBoardAfterGetOffer]" value="0"></input><br/>
+    preferArea[0]<input name="jobCondition[preferArea][0]" value="6001001000"></input><br/>
+    preferArea[1]<input name="jobCondition[preferArea][1]" value="6001002000"></input><br/>
+    customOnBoardDate year<input name="jobCondition[customOnBoardDate][year]" value=""></input><br/>
+    duration month<input name="jobCondition[customOnBoardDate][month]" value=""></input><br/>
+    duration date<input name="jobCondition[customOnBoardDate][date]" value=""></input><br/>
+    preferJobTitle<input name="jobCondition[preferJobTitle]" value="希望職類內容"></input><br/>
+    preferJobContent<input name="jobCondition[preferJobContent]" value="工作描述"></input><br/>
+    <input type="submit" value="Submit"></input>
+      </form>
     </Card>
   );
 }
