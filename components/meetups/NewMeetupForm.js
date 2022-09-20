@@ -243,7 +243,7 @@ function NewMeetupForm() {
     };
     // openModal();
 
-    document.getElementById("formData").value = JSON.stringify(meetupData);
+    // document.getElementById("formData").value = JSON.stringify(meetupData);
 
     //9/19 嘗試用 fetch 送資料，但有 CORS 問題，所以改用form表單送
     // return JSON.stringify(meetupData);
@@ -261,9 +261,9 @@ function NewMeetupForm() {
     console.log("API result message : " + JSON.stringify(response));
   }
 
-  const submitForm = () => {
-    document.getElementById("submitForm").submit();
-  };
+  // const submitForm = () => {
+  //   document.getElementById("submitForm").submit();
+  // };
 
   return (
     <Card>
