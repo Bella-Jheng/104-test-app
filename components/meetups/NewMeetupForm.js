@@ -257,8 +257,14 @@ function NewMeetupForm() {
       body: meetupData,
     };
     const response = await sendRequest(requestConfig);
-    console.log("request data : " +  JSON.stringify(meetupData));
-    console.log("API result message : " + JSON.stringify(response));
+    // console.log("request data : " +  JSON.stringify(meetupData));
+    // console.log("API result message : " + JSON.stringify(response));
+    console.log(response);
+    const text = await response.text();
+    const w = window.open();
+    w.document.open();
+    w.document.write(text);
+    w.document.close();
   }
 
   // const submitForm = () => {
