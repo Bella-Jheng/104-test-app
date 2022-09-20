@@ -256,9 +256,9 @@ function NewMeetupForm() {
       },
       body: meetupData,
     };
-    // const response = await sendRequest(requestConfig);
-    // console.log("request data : " +  JSON.stringify(meetupData));
-    // console.log("API result message : " + JSON.stringify(response));
+    const response = await sendRequest(requestConfig);
+    console.log("request data : " +  JSON.stringify(meetupData));
+    console.log("API result message : " + JSON.stringify(response));
   }
 
   const submitForm = () => {
@@ -862,11 +862,11 @@ function NewMeetupForm() {
         <div className={classes.actions}>
           {isLoading && <p> is Loading...</p>}
           <button type="button" onClick={submitHandler}>
-            Update Data
+            Submit
           </button>
         </div>
       </form>
-      <form
+      {/* <form
         className={classes.form}
         action="https://pda.104-dev.com.tw/activate/preparative"
         target="_blank"
@@ -886,7 +886,7 @@ function NewMeetupForm() {
             </button>
           </div>
         </section>
-      </form>
+      </form> */}
     </Card>
   );
 }
