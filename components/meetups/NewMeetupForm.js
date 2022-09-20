@@ -899,59 +899,183 @@ function NewMeetupForm() {
         method="post"
         tagart="_blank"
       >
-familyName<input name="activate[familyName]" value="陳"></input><br/>
-    firstName<input name="activate[firstName]" value="tester"></input><br/>
-    cellphone<input name="activate[cellphone]" value="0912345678"></input><br/>
-    identity<input name="activate[identity]" value="A141400874"></input><br/>
-    identityType<input name="activate[identityType]" value="0"></input><br/>
-    birthYear<input name="activate[birthYear]" value="2000"></input><br/>
-    birthMonth<input name="activate[birthMonth]" value="12"></input><br/>
-    birthDate<input name="activate[birthDate]" value="1"></input><br/>
-    sex<input name="activate[sex]" value="1"></input><br/>
-    email<input name="activate[email]" value="ting123@104.com.tw"></input><br/>
-    <hr/>
-    city<input name="info[city]" value="6001001001"></input><br/>
-    street<input name="info[street]" value="寶中路1巷1弄1號"></input><br/>
-    jobStatus<input name="info[jobStatus]" value="1"></input><br/>
-    military<input name="info[military]" value="1"></input><br/>
-    honoraryDischargeYear<input name="info[honoraryDischargeYear]" value="2011"></input><br/>
-    honoraryDischargeMonth<input name="info[honoraryDischargeMonth]" value="1"></input><br/>
-    driveCert[0]<input name="info[driveCert][0]" value="1"></input><br/>
-    driveCert[1]<input name="info[driveCert][1]" value="4"></input><br/>
-    bio<input name="info[bio]" value="大家好！！！"></input><br/>
-    <hr/>
-    name<input name="education[name]" value="一零四大學"></input><br/>
-    highest<input name="education[highest]" value="1"></input><br/>
-    departments[0] name<input name="education[departments][0][name]" value="化工1"></input><br/>
-    departments[0] type[0]<input name="education[departments][0][type][0]" value="3016002000"></input><br/>
-    departments[1] name<input name="education[departments][0][name]" value="工化2"></input><br/>
-    departments[1] type[0]<input name="education[departments][0][type][0]" value="3001002000"></input><br/>
-    duration startYear<input name="education[duration][startYear]" value="2001"></input><br/>
-    duration startMonth<input name="education[duration][startMonth]" value="12"></input><br/>
-    duration endYear<input name="education[duration][endYear]" value="2003"></input><br/>
-    duration endMonth<input name="education[duration][endMonth]" value="1"></input><br/>
-    status<input name="education[status]" value="1"></input><br/>
-    <hr/>
-    companyName<input name="experience[companyName]" value="104公司"></input><br/>
-    workArea<input name="experience[workArea]" value="6001018001"></input><br/>
-    jobName<input name="experience[jobName]" value="104職務"></input><br/>
-    duration startYear<input name="experience[duration][startYear]" value="2009"></input><br/>
-    duration startMonth<input name="experience[duration][startMonth]" value="2"></input><br/>
-    duration endYear<input name="experience[duration][endYear]" value="2010"></input><br/>
-    duration endMonth<input name="experience[duration][endMonth]" value="2"></input><br/>
-    <hr/>
-    jobTimePeriod[0]<input name="jobCondition[jobTimePeriod][0]" value="1"></input><br/>
-    jobTimePeriod[1]<input name="jobCondition[jobTimePeriod][1]" value="2"></input><br/>
-    onBoardDate<input name="jobCondition[onBoardDate]" value="1"></input><br/>
-    onBoardAfterGetOffer<input name="jobCondition[onBoardAfterGetOffer]" value="0"></input><br/>
-    preferArea[0]<input name="jobCondition[preferArea][0]" value="6001001000"></input><br/>
-    preferArea[1]<input name="jobCondition[preferArea][1]" value="6001002000"></input><br/>
-    customOnBoardDate year<input name="jobCondition[customOnBoardDate][year]" value=""></input><br/>
-    duration month<input name="jobCondition[customOnBoardDate][month]" value=""></input><br/>
-    duration date<input name="jobCondition[customOnBoardDate][date]" value=""></input><br/>
-    preferJobTitle<input name="jobCondition[preferJobTitle]" value="希望職類內容"></input><br/>
-    preferJobContent<input name="jobCondition[preferJobContent]" value="工作描述"></input><br/>
-    <input type="submit" value="Submit"></input>
+        <h1>基本資料</h1>
+        姓 familyName
+        <input name="activate[familyName]" defaultValue="" />
+        <br />名 firstName
+        <input name="activate[firstName]" defaultValue=""></input>
+        <br />
+        手機號碼 cellphone
+        <input name="activate[cellphone]" defaultValue=""></input>
+        <br />
+        身份證字號/護照號碼 identity
+        <input name="activate[identity]" defaultValue=""></input>
+        <br />
+        生日年份(西元) birthYear
+        <input name="activate[birthYear]" defaultValue=""></input>
+        <br />
+        生日月份 birthMonth
+        <input name="activate[birthMonth]" defaultValue=""></input>
+        <br />
+        生日日期 birthDate
+        <input name="activate[birthDate]" defaultValue=""></input>
+        <br />
+        性別 sex<input name="activate[sex]" defaultValue=""></input>
+        <br />
+        email<input name="activate[email]" defaultValue=""></input>
+        <br />
+        <hr />
+        <h1>個人資料</h1>
+        地區類別代碼 city<input name="info[city]" defaultValue=""></input>
+        <br />
+        通訊地址-地址 street<input name="info[street]" defaultValue=""></input>
+        <br />
+        就業狀態代碼 jobStatus
+        <input name="info[jobStatus]" defaultValue=""></input>
+        <br />
+        1: 仍在職(工作中) 2: 待業中(無工作)
+        <br />
+        兵役代碼 military<input name="info[military]" defaultValue=""></input>
+        <br />
+        0: 未曾設定或女性 1: 役畢 2: 屆退 3: 未役 4: 待役 5: 免役
+        <br />
+        退伍日期-年 honoraryDischargeYear
+        <input name="info[honoraryDischargeYear]" defaultValue=""></input>
+        <br />
+        退伍日期-月 honoraryDischargeMonth
+        <input name="info[honoraryDischargeMonth]" defaultValue=""></input>
+        <br />
+        driveCert[0]<input name="info[driveCert][0]" defaultValue=""></input>
+        <br />
+        driveCert[1]<input name="info[driveCert][1]" defaultValue=""></input>
+        <br />
+        駕駛執照代碼 1:輕型機車駕照 2:普通重型機車駕照 4:大型重型機車駕照
+        8:普通小型車駕照 16:普通大貨車駕照 32:普通大客車駕照 64:普通聯結車駕照
+        128:職業小型車駕照 256:職業大貨車駕照 512:職業大客車駕照
+        1024:執業連結車駕照
+        <br />
+        個人簡介 bio<input name="info[bio]" defaultValue=""></input>
+        <br />
+        <hr />
+        <h1>學歷</h1>
+        學校名稱​ name<input name="education[name]" defaultValue=""></input>
+        <br />
+        最高學歷 highest
+        <input name="education[highest]" defaultValue=""></input>
+        <br />
+        ​ 代碼 1: 博士 2: 碩士 3: 大學 4: 四技 5: 二技 6: 二專 7: 三專 8: 五專
+        9: 高中 10: 高職 11: 國中(含)以下
+        <br />
+        科系名稱 departments[0] ​
+        <input name="education[departments][0][name]" defaultValue=""></input>
+        <br />
+        科系類別 departments[0][0]
+        <input
+          name="education[departments][0][type][0]"
+          defaultValue=""
+        ></input>
+        <br />
+        科系名稱 departments[1] ​
+        <input name="education[departments][0][name]" defaultValue=""></input>
+        <br />
+        科系類別 departments[1][0]
+        <input
+          name="education[departments][0][type][0]"
+          defaultValue=""
+        ></input>
+        <br />
+        就學期間-起年 duration startYear
+        <input name="education[duration][startYear]" defaultValue=""></input>
+        <br />
+        就學期間-起月 duration startMonth
+        <input name="education[duration][startMonth]" defaultValue=""></input>
+        <br />
+        就學期間-迄年 duration endYear
+        <input name="education[duration][endYear]" defaultValue=""></input>
+        <br />
+        就學期間-迄月 duration endMonth
+        <input name="education[duration][endMonth]" defaultValue=""></input>
+        <br />
+        學歷狀態 status<input name="education[status]" defaultValue=""></input>
+        <br />
+        學歷狀態 代碼 1: 畢業 2: 肄業 3: 就學中
+        <br />
+        <hr />
+        <h1>工作經歷</h1>
+        公司名稱​ companyName
+        <input name="experience[companyName]" defaultValue=""></input>
+        <br />
+        工作地點 類目代碼 workArea
+        <input name="experience[workArea]" defaultValue=""></input>
+        <br />
+        職務名稱​ jobName
+        <input name="experience[jobName]" defaultValue=""></input>
+        <br />
+        任職期間 - 開始年份 duration startYear
+        <input name="experience[duration][startYear]" defaultValue=""></input>
+        <br />
+        任職期間 - 開始月份 duration startMonth
+        <input name="experience[duration][startMonth]" defaultValue=""></input>
+        <br />
+        任職期間 - 結束年份 duration endYear
+        <input name="experience[duration][endYear]" defaultValue=""></input>
+        <br />
+        任職期間 - 結束月份 duration endMonth
+        <input name="experience[duration][endMonth]" defaultValue=""></input>
+        <br />
+        <h1>求職條件</h1>
+        <hr />
+        上班時段 jobTimePeriod[0]
+        <input name="jobCondition[jobTimePeriod][0]" defaultValue=""></input>
+        <br />
+        上班時段 jobTimePeriod[1]
+        <input name="jobCondition[jobTimePeriod][1]" defaultValue=""></input>
+        <br />
+        1:日班 2:夜班 4:大夜班 8:假日班
+        <br />
+        可上班日 onBoardDate
+        <input name="jobCondition[onBoardDate]" defaultValue=""></input>
+        <br />
+        1: 錄取後 -1: 自訂日期 <br />
+        可開始上班日的選項代碼 onBoardAfterGetOffer
+        <input
+          name="jobCondition[onBoardAfterGetOffer]"
+          defaultValue=""
+        ></input><br/>
+        0: 隨時
+ 1: 1週
+ 2: 2週
+ 3: 3週
+ 4: 一個月
+ 5: 二個月
+ 6: 三個月
+        <br />
+        最快可上班日期-年 customOnBoardDate year
+        <input name="jobCondition[customOnBoardDate][year]" defaultValue=""></input>
+        <br />
+        最快可上班日期-月 duration month
+        <input name="jobCondition[customOnBoardDate][month]" defaultValue=""></input>
+        <br />
+        最快可上班日期-日 duration date
+        <input name="jobCondition[customOnBoardDate][date]" defaultValue=""></input>
+        <br />
+        希望地點 類目代碼  preferArea[0]
+        <input name="jobCondition[preferArea][0]" defaultValue=""></input>
+        <br />
+        希望地點 類目代碼 preferArea[1]
+        <input name="jobCondition[preferArea][1]" defaultValue=""></input>
+        <br />
+        
+        希望職稱 preferJobTitle
+        <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
+        <br />
+        希望工作內容 preferJobContent
+        <input name="jobCondition[preferJobContent]" defaultValue=""></input>
+        <br /><hr/>
+        平台傳的指定頁面 returnUrl
+        <input name="returnUrl" defaultValue=""></input>
+        <br />
+        <input type="submit" value="Submit"></input>
       </form>
     </Card>
   );
