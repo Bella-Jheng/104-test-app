@@ -898,7 +898,7 @@ function NewMeetupForm() {
         id='form'
         action="https://pda.104-dev.com.tw/activate/preparative"
         method="post"
-        tagart="_blank"
+        target="_blank"
       >
         <h1>基本資料</h1>
         姓 familyName
