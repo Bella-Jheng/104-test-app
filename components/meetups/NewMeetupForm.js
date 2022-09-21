@@ -954,7 +954,7 @@ function NewMeetupForm() {
         128:職業小型車駕照 256:職業大貨車駕照 512:職業大客車駕照
         1024:執業連結車駕照
         <br />
-        個人簡介 bio<input name="info[bio]" defaultValue=""></input>
+        個人簡介 bio<textarea name="info[bio]" defaultValue=""/>
         <br />
         <hr />
         <h1>學歷</h1>
@@ -1060,7 +1060,7 @@ function NewMeetupForm() {
         <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
         <br />
         希望工作內容 preferJobContent
-        <input name="jobCondition[preferJobContent]" defaultValue=""></input>
+        <textarea name="jobCondition[preferJobContent]" defaultValue=""/>
         <br />
         <hr />
         平台傳的指定頁面 returnUrl
