@@ -895,7 +895,7 @@ function NewMeetupForm() {
       </form> */}
       <form
         className={classes.secondForm}
-        id='form'
+        id="form"
         action="https://pda.104-dev.com.tw/activate/preparative"
         method="post"
         target="_blank"
@@ -946,16 +946,19 @@ function NewMeetupForm() {
         退伍日期-月 honoraryDischargeMonth
         <input name="info[honoraryDischargeMonth]" defaultValue=""></input>
         <br />
-        駕駛執照代碼 driveCert[0]<input name="info[driveCert][0]" defaultValue=""></input>
+        駕駛執照代碼 driveCert[0]
+        <input name="info[driveCert][0]" defaultValue=""></input>
         <br />
-        駕駛執照代碼 driveCert[1]<input name="info[driveCert][1]" defaultValue=""></input>
+        駕駛執照代碼 driveCert[1]
+        <input name="info[driveCert][1]" defaultValue=""></input>
         <br />
         駕駛執照代碼 1:輕型機車駕照 2:普通重型機車駕照 4:大型重型機車駕照
         8:普通小型車駕照 16:普通大貨車駕照 32:普通大客車駕照 64:普通聯結車駕照
         128:職業小型車駕照 256:職業大貨車駕照 512:職業大客車駕照
         1024:執業連結車駕照
         <br />
-        個人簡介 bio<textarea name="info[bio]" defaultValue=""/>
+        個人簡介 bio
+        <textarea name="info[bio]" defaultValue="" />
         <br />
         <hr />
         <h1>學歷</h1>
@@ -967,10 +970,23 @@ function NewMeetupForm() {
         ​ 代碼 1: 博士 2: 碩士 3: 大學 4: 四技 5: 二技 6: 二專 7: 三專 8: 五專
         9: 高中 10: 高職 11: 國中(含)以下
         <br />
-        科系名稱 departments[0] name<input name="education[departments][0][name]" defaultValue=""/><br/>
-        科系類別 departments[0] type[0]<input name="education[departments][0][type][0]" defaultValue=""/><br/>
-    科系名稱 departments[1] name<input name="education[departments][1][name]" defaultValue=""/><br/>
-    科系類別 departments[1] type[0]<input name="education[departments][1][type][0]" defaultValue=""/><br/>
+        科系名稱 departments[0] name
+        <input name="education[departments][0][name]" defaultValue=" "></input>
+        <br />
+        科系類別 departments[0] type[0]
+        <input
+          name="education[departments][0][type][0]"
+          defaultValue=" "
+        ></input>
+        <br />
+        科系名稱 departments[1] name
+        <input name="education[departments][1][name]" defaultValue=" "></input>
+        <br />
+        科系類別 departments[1] type[0]
+        <input
+          name="education[departments][1][type][0]"
+          defaultValue=" "
+        ></input>
         <br />
         就學期間-起年 duration startYear
         <input name="education[duration][startYear]" defaultValue=""></input>
@@ -1061,14 +1077,18 @@ function NewMeetupForm() {
         <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
         <br />
         希望工作內容 preferJobContent
-        <textarea name="jobCondition[preferJobContent]" defaultValue=""/>
+        <textarea name="jobCondition[preferJobContent]" defaultValue="" />
         <br />
         <hr />
         平台傳的指定頁面 returnUrl
         <input name="returnUrl" defaultValue=""></input>
         <br />
         <div>
-        <input type="submit" value="Submit" className={classes.button}></input>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
         </div>
       </form>
     </Card>
