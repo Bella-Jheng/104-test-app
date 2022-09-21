@@ -894,7 +894,8 @@ function NewMeetupForm() {
         </section>
       </form> */}
       <form
-        id="form"
+        className={classes.secondForm}
+        id='form'
         action="https://pda.104-dev.com.tw/activate/preparative"
         method="post"
         tagart="_blank"
@@ -972,7 +973,7 @@ function NewMeetupForm() {
     科系類別 departments[1] type[0]<input name="education[departments][1][type][0]" defaultValue=""/><br/>
         <br />
         就學期間-起年 duration startYear
-        <input name="education[duration][startYear]" defaultValue=""></input>ß
+        <input name="education[duration][startYear]" defaultValue=""></input>
         <br />
         就學期間-起月 duration startMonth
         <input name="education[duration][startMonth]" defaultValue=""></input>
@@ -1066,7 +1067,9 @@ function NewMeetupForm() {
         平台傳的指定頁面 returnUrl
         <input name="returnUrl" defaultValue=""></input>
         <br />
-        <input type="submit" value="Submit"></input>
+        <div>
+        <input type="submit" value="Submit" className={classes.button}></input>
+        </div>
       </form>
     </Card>
   );

@@ -76,3 +76,17 @@
   background-color: #a50e48;
   border-color: #a50e48;
 }
+
+.secondForm input,.secondForm textarea{
+  margin: 4px 0px;
+}
+
+.secondForm div{
+  /* text-align: right; */
+}
+
+.secondForm .button{
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
