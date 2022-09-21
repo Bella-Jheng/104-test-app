@@ -62,10 +62,26 @@ var raw = JSON.stringify({
   }
 });
 
+var form_data = new FormData();
+
+var item = requestConfig.body
+console.log(item)
+for ( var key in item ) {
+    form_data.append(key, item[key]);
+}
+
+const formData = new FormData();
+    Object.keys(item).forEach(key => formData.append(key, item[key]));
+
+var form_data = new FormData();
+for ( var key in item ) {
+    form_data.append(key, item[key]);
+}
+
 var requestOptions = {
   method: 'POST',
   headers: myHeaders,
-  body: raw,
+  body: formData,
   redirect: 'follow'
 };
 
@@ -89,6 +105,8 @@ s
     }
     setIsLoading(false);
   }, []);
+    
+ 
 
   return {
     isLoading,

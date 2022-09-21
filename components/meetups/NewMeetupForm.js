@@ -260,11 +260,11 @@ function NewMeetupForm() {
     // console.log("request data : " +  JSON.stringify(meetupData));
     // console.log("API result message : " + JSON.stringify(response));
     console.log(response);
-    const text = await response.text();
-    const w = window.open();
-    w.document.open();
-    w.document.write(text);
-    w.document.close();
+    // const text = await response.text();
+    // const w = window.open();
+    // w.document.open();
+    // w.document.write(text);
+    // w.document.close();
   }
 
   // const submitForm = () => {
@@ -945,9 +945,9 @@ function NewMeetupForm() {
         退伍日期-月 honoraryDischargeMonth
         <input name="info[honoraryDischargeMonth]" defaultValue=""></input>
         <br />
-        driveCert[0]<input name="info[driveCert][0]" defaultValue=""></input>
+        駕駛執照代碼 driveCert[0]<input name="info[driveCert][0]" defaultValue=""></input>
         <br />
-        driveCert[1]<input name="info[driveCert][1]" defaultValue=""></input>
+        駕駛執照代碼 driveCert[1]<input name="info[driveCert][1]" defaultValue=""></input>
         <br />
         駕駛執照代碼 1:輕型機車駕照 2:普通重型機車駕照 4:大型重型機車駕照
         8:普通小型車駕照 16:普通大貨車駕照 32:普通大客車駕照 64:普通聯結車駕照
@@ -966,26 +966,13 @@ function NewMeetupForm() {
         ​ 代碼 1: 博士 2: 碩士 3: 大學 4: 四技 5: 二技 6: 二專 7: 三專 8: 五專
         9: 高中 10: 高職 11: 國中(含)以下
         <br />
-        科系名稱 departments[0] ​
-        <input name="education[departments][0][name]" defaultValue=""></input>
-        <br />
-        科系類別 departments[0][0]
-        <input
-          name="education[departments][0][type][0]"
-          defaultValue=""
-        ></input>
-        <br />
-        科系名稱 departments[1] ​
-        <input name="education[departments][0][name]" defaultValue=""></input>
-        <br />
-        科系類別 departments[1][0]
-        <input
-          name="education[departments][0][type][0]"
-          defaultValue=""
-        ></input>
+        科系名稱 departments[0] name<input name="education[departments][0][name]" defaultValue=""/><br/>
+        科系類別 departments[0] type[0]<input name="education[departments][0][type][0]" defaultValue=""/><br/>
+    科系名稱 departments[1] name<input name="education[departments][1][name]" defaultValue=""/><br/>
+    科系類別 departments[1] type[0]<input name="education[departments][1][type][0]" defaultValue=""/><br/>
         <br />
         就學期間-起年 duration startYear
-        <input name="education[duration][startYear]" defaultValue=""></input>
+        <input name="education[duration][startYear]" defaultValue=""></input>ß
         <br />
         就學期間-起月 duration startMonth
         <input name="education[duration][startMonth]" defaultValue=""></input>
@@ -1041,37 +1028,41 @@ function NewMeetupForm() {
         <input
           name="jobCondition[onBoardAfterGetOffer]"
           defaultValue=""
-        ></input><br/>
-        0: 隨時
- 1: 1週
- 2: 2週
- 3: 3週
- 4: 一個月
- 5: 二個月
- 6: 三個月
+        ></input>
+        <br />
+        0: 隨時 1: 1週 2: 2週 3: 3週 4: 一個月 5: 二個月 6: 三個月
         <br />
         最快可上班日期-年 customOnBoardDate year
-        <input name="jobCondition[customOnBoardDate][year]" defaultValue=""></input>
+        <input
+          name="jobCondition[customOnBoardDate][year]"
+          defaultValue=""
+        ></input>
         <br />
         最快可上班日期-月 duration month
-        <input name="jobCondition[customOnBoardDate][month]" defaultValue=""></input>
+        <input
+          name="jobCondition[customOnBoardDate][month]"
+          defaultValue=""
+        ></input>
         <br />
         最快可上班日期-日 duration date
-        <input name="jobCondition[customOnBoardDate][date]" defaultValue=""></input>
+        <input
+          name="jobCondition[customOnBoardDate][date]"
+          defaultValue=""
+        ></input>
         <br />
-        希望地點 類目代碼  preferArea[0]
+        希望地點 類目代碼 preferArea[0]
         <input name="jobCondition[preferArea][0]" defaultValue=""></input>
         <br />
         希望地點 類目代碼 preferArea[1]
         <input name="jobCondition[preferArea][1]" defaultValue=""></input>
         <br />
-        
         希望職稱 preferJobTitle
         <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
         <br />
         希望工作內容 preferJobContent
         <input name="jobCondition[preferJobContent]" defaultValue=""></input>
-        <br /><hr/>
+        <br />
+        <hr />
         平台傳的指定頁面 returnUrl
         <input name="returnUrl" defaultValue=""></input>
         <br />
