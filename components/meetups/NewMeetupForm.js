@@ -925,6 +925,13 @@ function NewMeetupForm() {
         <br />
         email<input name="activate[email]" defaultValue=""></input>
         <br />
+        <div>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
+        </div>
         <hr />
         <h1>個人資料</h1>
         地區類別代碼 city<input name="info[city]" defaultValue=""></input>
@@ -960,6 +967,13 @@ function NewMeetupForm() {
         個人簡介 bio
         <textarea name="info[bio]" defaultValue="" />
         <br />
+        <div>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
+        </div>
         <hr />
         <h1>學歷</h1>
         學校名稱​ name<input name="education[name]" defaultValue=""></input>
@@ -1004,6 +1018,13 @@ function NewMeetupForm() {
         <br />
         學歷狀態 代碼 1: 畢業 2: 肄業 3: 就學中
         <br />
+        <div>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
+        </div>
         <hr />
         <h1>工作經歷</h1>
         公司名稱​ companyName
@@ -1026,9 +1047,15 @@ function NewMeetupForm() {
         <br />
         任職期間 - 結束月份 duration endMonth
         <input name="experience[duration][endMonth]" defaultValue=""></input>
-        <br />
-        <h1>求職條件</h1>
+        <div>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
+        </div>
         <hr />
+        <h1>求職條件</h1>
         上班時段 jobTimePeriod[0]
         <input name="jobCondition[jobTimePeriod][0]" defaultValue=""></input>
         <br />
@@ -1067,7 +1094,7 @@ function NewMeetupForm() {
           defaultValue=""
         ></input>
         <br />
-        希望地點 類目代碼 preferArea[0]
+        希望地點 類目代碼 preferArea
         <input name="jobCondition[preferArea][0]" defaultValue=""></input>
         <br />
         希望地點 類目代碼 preferArea[1]
@@ -1079,6 +1106,13 @@ function NewMeetupForm() {
         希望工作內容 preferJobContent
         <textarea name="jobCondition[preferJobContent]" defaultValue="" />
         <br />
+        <div>
+          <input
+            type="submit"
+            value="Submit"
+            className={classes.button}
+          ></input>
+        </div>
         <hr />
         平台傳的指定頁面 returnUrl
         <input name="returnUrl" defaultValue=""></input>
