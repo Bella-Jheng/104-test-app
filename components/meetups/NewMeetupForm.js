@@ -273,8 +273,8 @@ function NewMeetupForm() {
 
   return (
     <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <h1>基本資料</h1>
+      {/* <form className={classes.form} onSubmit={submitHandler}>
+        <h1>基本資料</h1> */}
         {/* 姓名 */}
         {/* <section>
           <div className={`${classes.control} + ${classes.col2}`}>
@@ -494,9 +494,9 @@ function NewMeetupForm() {
             <label htmlFor="bio">個人簡介</label>
             <textarea type="text" id="bio" ref={bioInputRef} />
           </div>
-        </section>
+        </section> */}
 
-        <h1>學歷</h1> */}
+        {/* <h1>學歷</h1> */}
 
         {/* 學校名稱 */}
         {/* <section className={classes.section}>
@@ -724,7 +724,7 @@ function NewMeetupForm() {
           </div>
         </section> */}
 
-        <h1>求職條件</h1>
+        {/* <h1>求職條件</h1> */}
 
         {/* 上班時段 */}
         {/* <section className={classes.section}>
@@ -854,14 +854,14 @@ function NewMeetupForm() {
           </div>
         </section> */}
         {/* 平台傳的指定頁面 */}
-        {/* <section className={classes.section}>
+       {/* ? <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="returnUrl">平台傳的指定頁面</label>
             <input type="text" id="returnUrl" ref={returnUrlInputRef} />
           </div>
         </section> */}
 
-        <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
+        {/* <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
         {modalIsOpen && <Backdrop show={modalIsOpen} close={closeModal} />}
 
         <div className={classes.actions}>
@@ -870,7 +870,7 @@ function NewMeetupForm() {
             Submit
           </button>
         </div>
-      </form>
+      </form> */}
 
       <form
         className={classes.secondForm}
