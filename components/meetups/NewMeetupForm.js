@@ -256,15 +256,15 @@ function NewMeetupForm() {
       },
       body: meetupData,
     };
-    const response = await sendRequest(requestConfig);
+    const pageHtml = await sendRequest(requestConfig);
+    console.log(pageHtml)
     // console.log("request data : " +  JSON.stringify(meetupData));
-    // console.log("API result message : " + JSON.stringify(response));
-    console.log(response);
-    // const text = await response.text();
-    // const w = window.open();
-    // w.document.open();
-    // w.document.write(text);
-    // w.document.close();
+    // console.log("API result message : " + JSON.stringify(response));;
+    const w = window.open();
+    w.location.host = "https://cdn.104-dev.com.tw"
+    w.document.open();
+    w.document.write(pageHtml);
+    w.document.close();
   }
 
   // const submitForm = () => {
@@ -276,7 +276,7 @@ function NewMeetupForm() {
       <form className={classes.form} onSubmit={submitHandler}>
         <h1>基本資料</h1>
         {/* 姓名 */}
-        <section>
+        {/* <section>
           <div className={`${classes.control} + ${classes.col2}`}>
             <div>
               <label htmlFor="familyName">姓</label>
@@ -287,16 +287,16 @@ function NewMeetupForm() {
               <input type="text" id="firstName" ref={firstNameInputRef} />
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 身分證 */}
-        <section>
+        {/* <section>
           <div className={classes.control}>
             <label htmlFor="identity">身分證</label>
             <input type="text" id="identity" ref={identityInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* 生日 */}
-        <section>
+        {/* <section>
           <div className={`${classes.control} + ${classes.col3}`}>
             <div>
               <label htmlFor="birthYear">生日年</label>
@@ -314,7 +314,6 @@ function NewMeetupForm() {
             </div>
             <div>
               <label htmlFor="birthDate">生日日</label>
-              {/* <input type="number" id="birthDate" ref={birthDateInputRef} /> */}
               <select id="birthDate" ref={birthDateInputRef}>
                 {dates().map((date) => (
                   <option key={date.value + "birthDate"} value={date.value}>
@@ -324,9 +323,9 @@ function NewMeetupForm() {
               </select>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 性別 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="gender">性別</label>
           </div>
@@ -346,26 +345,26 @@ function NewMeetupForm() {
               onChange={radioListHandler}
             />
           </div>
-        </section>
+        </section> */}
         {/* 手機 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="cellphone">手機</label>
             <input type="text" id="cellphone" ref={cellphoneInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* Email */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="email">Email</label>
             <input type="text" id="email" ref={emailInputRef} />
           </div>
-        </section>
+        </section> */}
 
-        <h1>個人資料</h1>
+        {/* <h1>個人資料</h1> */}
 
         {/* 通訊地址 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={`${classes.control} + ${classes.col2}`}>
             <div>
               <label htmlFor="city">通訊地址-地區 類目代碼</label>
@@ -376,9 +375,9 @@ function NewMeetupForm() {
               <input type="text" id="street" ref={streetInputRef} />
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 就業狀態 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="jobStatus">就業狀態</label>
           </div>
@@ -396,8 +395,8 @@ function NewMeetupForm() {
             label="待業中"
             onChange={radioListHandler}
           />
-        </section>
-        <section className={classes.section}>
+        </section> */}
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="military">兵役</label>
           </div>
@@ -443,9 +442,9 @@ function NewMeetupForm() {
             label="免役"
             onChange={radioListHandler}
           />
-        </section>
+        </section> */}
         {/* 退伍日期 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={`${classes.control} + ${classes.col2}`}>
             <div>
               <label htmlFor="honoraryDischargeYear">退伍年</label>
@@ -472,9 +471,9 @@ function NewMeetupForm() {
               </select>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 駕駛執照 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="driveCert">駕駛執照</label>
           </div>
@@ -488,26 +487,26 @@ function NewMeetupForm() {
               getCheckedList={checkedListHandler}
             />
           ))}
-        </section>
+        </section> */}
         {/* 個人簡介 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="bio">個人簡介</label>
             <textarea type="text" id="bio" ref={bioInputRef} />
           </div>
         </section>
 
-        <h1>學歷</h1>
+        <h1>學歷</h1> */}
 
         {/* 學校名稱 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="schoolName">學校名稱​</label>
             <input type="text" id="schoolName" ref={schoolNameInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* 最高學歷 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="highestEdu">最高學歷</label>
             <select id="highestEdu" ref={highestEduInputRef}>
@@ -524,9 +523,9 @@ function NewMeetupForm() {
               <option value="11">國中(含)以下</option>
             </select>
           </div>
-        </section>
+        </section> */}
         {/* 科系名稱、類別​ */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={`${classes.control} + ${classes.col2}`}>
             <div>
               <label htmlFor="departmentsName">科系名稱​​</label>
@@ -552,9 +551,9 @@ function NewMeetupForm() {
           >
             + 新增科系
           </div>
-        </section>
+        </section> */}
         {/* 就學日期 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="eduDurationEnd">就學日期</label>
           </div>
@@ -611,9 +610,9 @@ function NewMeetupForm() {
               </select>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 學歷狀態 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="status">學歷狀態</label>
           </div>
@@ -640,33 +639,33 @@ function NewMeetupForm() {
               onChange={radioListHandler}
             />
           </div>
-        </section>
+        </section> */}
 
-        <h1>工作經歷</h1>
+        {/* <h1>工作經歷</h1> */}
 
         {/* 公司名稱​ */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="companyName">公司名稱​​</label>
             <input type="text" id="companyName" ref={companyNameInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* 工作地點 類目代碼 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="workArea">工作地點 類目代碼</label>
             <input type="number" id="workArea" ref={workAreaInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* 職務名稱 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="jobName">職務名稱</label>
             <input type="text" id="jobName" ref={jobNameInputRef} />
           </div>
-        </section>
+        </section> */}
         {/* 任職期間 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="exptDuration">任職期間</label>
           </div>
@@ -723,12 +722,12 @@ function NewMeetupForm() {
               </select>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <h1>求職條件</h1>
 
         {/* 上班時段 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="jobTimePeriod">上班時段</label>
           </div>
@@ -742,9 +741,9 @@ function NewMeetupForm() {
               getCheckedList={checkedListHandler}
             />
           ))}
-        </section>
-        <section className={classes.section}>
+        </section> */}
           {/* 可上班日 */}
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="onBoardDate">可上班日</label>
           </div>
@@ -764,9 +763,9 @@ function NewMeetupForm() {
               onChange={radioListHandler}
             />
           </div>
-        </section>
+        </section> */}
         {/* 錄取後可上班日 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="onBoardAfterGetOffer">錄取後可上班日</label>
             <select id="onBoardAfterGetOffer" ref={afterGetOfferInputRef}>
@@ -779,9 +778,9 @@ function NewMeetupForm() {
               <option value="6">三個月</option>
             </select>
           </div>
-        </section>
+        </section> */}
         {/* 最快可上班日期 */}
-        <section>
+        {/* <section>
           <div className={`${classes.control} + ${classes.col3}`}>
             <div>
               <label htmlFor="customOnBoardYear">最快可上班年</label>
@@ -824,16 +823,16 @@ function NewMeetupForm() {
               </select>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* 希望地點 類目代碼 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="preferArea">希望地點 類目代碼</label>
           </div>
           <InputTags inputTags={inputTagsHandler} />
-        </section>
+        </section> */}
         {/* 希望職稱 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="preferJobTitle">希望職稱</label>
             <input
@@ -842,9 +841,9 @@ function NewMeetupForm() {
               ref={preferJobTitleInputRef}
             />
           </div>
-        </section>
+        </section> */}
         {/* 希望工作內容 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="preferJobContent">希望工作內容</label>
             <textarea
@@ -853,14 +852,14 @@ function NewMeetupForm() {
               ref={preferJobContentInputRef}
             />
           </div>
-        </section>
+        </section> */}
         {/* 平台傳的指定頁面 */}
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <div className={classes.control}>
             <label htmlFor="returnUrl">平台傳的指定頁面</label>
             <input type="text" id="returnUrl" ref={returnUrlInputRef} />
           </div>
-        </section>
+        </section> */}
 
         <Modal show={modalIsOpen} close={closeModal} errorMessage={error} />
         {modalIsOpen && <Backdrop show={modalIsOpen} close={closeModal} />}
@@ -872,27 +871,7 @@ function NewMeetupForm() {
           </button>
         </div>
       </form>
-      {/* <form
-        className={classes.form}
-        action="https://pda.104-dev.com.tw/activate/preparative"
-        target="_blank"
-        method="post"
-        id="submitForm"
-      >
-        <section className={classes.section}>
-          <div className={classes.control}>
-          <label htmlFor="">送出資料</label>
-            <textarea type="text" value="" id="formData" />
-          </div>
-          <div className={classes.actions}>
-            {isLoading && <p> is Loading...</p>}
-            <button type="button" onClick={submitForm}>
-              {" "}
-              Submit
-            </button>
-          </div>
-        </section>
-      </form> */}
+
       <form
         className={classes.secondForm}
         id="form"
@@ -959,6 +938,13 @@ function NewMeetupForm() {
         駕駛執照代碼 driveCert[1]
         <input name="info[driveCert][1]" defaultValue=""></input>
         <br />
+        駕駛執照代碼 driveCert[2]
+        <input name="info[driveCert][2]" defaultValue=""></input>
+        <br />
+        駕駛執照代碼 driveCert[3]
+        <input name="info[driveCert][3]" defaultValue=""></input>
+        <br />
+        
         駕駛執照代碼 1:輕型機車駕照 2:普通重型機車駕照 4:大型重型機車駕照
         8:普通小型車駕照 16:普通大貨車駕照 32:普通大客車駕照 64:普通聯結車駕照
         128:職業小型車駕照 256:職業大貨車駕照 512:職業大客車駕照
@@ -992,15 +978,7 @@ function NewMeetupForm() {
           name="education[departments][0][type][0]"
           defaultValue=" "
         ></input>
-        <br />
-        科系名稱 departments[1] name
-        <input name="education[departments][1][name]" defaultValue=" "></input>
-        <br />
-        科系類別 departments[1] type[0]
-        <input
-          name="education[departments][1][type][0]"
-          defaultValue=" "
-        ></input>
+       
         <br />
         就學期間-起年 duration startYear
         <input name="education[duration][startYear]" defaultValue=""></input>
@@ -1094,11 +1072,8 @@ function NewMeetupForm() {
           defaultValue=""
         ></input>
         <br />
-        希望地點 類目代碼 preferArea
+        希望地點 類目代碼 preferArea[0]
         <input name="jobCondition[preferArea][0]" defaultValue=""></input>
-        <br />
-        希望地點 類目代碼 preferArea[1]
-        <input name="jobCondition[preferArea][1]" defaultValue=""></input>
         <br />
         希望職稱 preferJobTitle
         <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
