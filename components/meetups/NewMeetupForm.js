@@ -963,30 +963,6 @@ function NewMeetupForm() {
         ​ 代碼 1: 博士 2: 碩士 3: 大學 4: 四技 5: 二技 6: 二專 7: 三專 8: 五專
         9: 高中 10: 高職 11: 國中(含)以下
         <br />
-        就學期間-起年 duration startYear
-        <input name="education[duration][startYear]" defaultValue=""></input>
-        <br />
-        就學期間-起月 duration startMonth
-        <input name="education[duration][startMonth]" defaultValue=""></input>
-        <br />
-        就學期間-迄年 duration endYear
-        <input name="education[duration][endYear]" defaultValue=""></input>
-        <br />
-        就學期間-迄月 duration endMonth
-        <input name="education[duration][endMonth]" defaultValue=""></input>
-        <br />
-        學歷狀態 status<input name="education[status]" defaultValue=""></input>
-        <br />
-        學歷狀態 代碼 1: 畢業 2: 肄業 3: 就學中
-        <br />
-        學校名稱​ name<input name="education[name]" defaultValue=""></input>
-        <br />
-        最高學歷 highest
-        <input name="education[highest]" defaultValue=""></input>
-        <br />
-        ​ 代碼 1: 博士 2: 碩士 3: 大學 4: 四技 5: 二技 6: 二專 7: 三專 8: 五專
-        9: 高中 10: 高職 11: 國中(含)以下
-        <br />
         科系名稱 departments[0] name
         <input name="education[departments][0][name]" defaultValue=""></input>
         <br />
@@ -1099,6 +1075,9 @@ function NewMeetupForm() {
         <br />
         希望地點 類目代碼 preferArea[0]
         <input name="jobCondition[preferArea][0]" defaultValue=""></input>
+        <br />
+        希望地點 類目代碼 preferArea[1]
+        <input name="jobCondition[preferArea][1]" defaultValue=""></input>
         <br />
         希望職稱 preferJobTitle
         <input name="jobCondition[preferJobTitle]" defaultValue=""></input>
