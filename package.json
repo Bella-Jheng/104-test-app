@@ -28,12 +28,12 @@
   "main": "next.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bella-Jheng/104-app.git"
+    "url": "git+https://github.com/Bella-Jheng/104-test-app.git"
   },
   "author": "yiting",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Bella-Jheng/104-app/issues"
+    "url": "https://github.com/Bella-Jheng/104-test-app/issues"
   },
-  "homepage": "https://github.com/Bella-Jheng/104-app#readme"
+  "homepage": "https://github.com/Bella-Jheng/104-test-app#readme"
 }
